@@ -37,9 +37,9 @@ release(){
     
     git add . && git commit -m $git_message
     
-    git checkout master
+    git checkout main
     git merge --no-ff -m 'Merge branch '$release_branch'' $release_branch
-    git push origin master
+    git push origin main
     git tag $version
     git push origin $version
     git checkout develop
