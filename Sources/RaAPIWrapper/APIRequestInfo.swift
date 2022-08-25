@@ -10,6 +10,10 @@ import Foundation
 
 /// Information needed to request the api
 public struct APIRequestInfo: APIRequestInfoProtocol {
+    /// A special api base url.
+    ///
+    /// Should be a setting item independent of your global configuration.
+    public let specialBaseURL: URL?
     
     /// The path to the requested api
     public let path: String

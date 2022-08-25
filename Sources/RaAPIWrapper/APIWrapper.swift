@@ -17,6 +17,11 @@ open class APIWrapper<Parameter>: APIRequestInfoProtocol {
     
     public typealias ParameterBuilder = (Parameter) -> APIParameters
     
+    /// A special api base url.
+    ///
+    /// Should be a setting item independent of your global configuration.
+    public let specialBaseURL: URL?
+    
     /// The path to the requested api
     public let path: String
     
@@ -33,12 +38,14 @@ open class APIWrapper<Parameter>: APIRequestInfoProtocol {
     private let parameterBuilder: ParameterBuilder?
     
     public init(
+        specialBaseURL: URL? = nil,
         path: String,
         method: HTTPMethod,
         header: HeaderBuilder? = nil,
         parameter: ParameterBuilder? = nil,
         parameterEncoding: ParameterEncoding? = nil
     ) {
+        self.specialBaseURL = specialBaseURL
         self.path = path
         self.method = method
         self.headerBuilder = header
@@ -49,6 +56,7 @@ open class APIWrapper<Parameter>: APIRequestInfoProtocol {
     open var wrappedValue: (Parameter) -> APIRequestInfo {
         return {
             .init(
+                specialBaseURL: self.specialBaseURL,
                 path: self.path,
                 method: self.method,
                 header: self.headerBuilder?($0),
