@@ -12,13 +12,15 @@ import Foundation
 @propertyWrapper
 public final class POST<Parameter>: APIWrapper<Parameter> {
     public init(
-        path: String,
+        _ path: String,
+        specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
         parameter: ParameterBuilder? = nil,
         parameterEncoding: ParameterEncoding? = nil
     ) {
         super.init(
             path: path,
+            specialBaseURL: specialBaseURL,
             method: .post,
             header: header,
             parameter: parameter,
@@ -35,13 +37,15 @@ public final class POST<Parameter>: APIWrapper<Parameter> {
 @propertyWrapper
 public final class GET<Parameter>: APIWrapper<Parameter> {
     public init(
-        path: String,
+        _ path: String,
+        specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
         parameter: ParameterBuilder? = nil,
         parameterEncoding: ParameterEncoding? = nil
     ) {
         super.init(
             path: path,
+            specialBaseURL: specialBaseURL,
             method: .get,
             header: header,
             parameter: parameter,
