@@ -13,7 +13,7 @@ import Foundation
 public final class POST<Parameter>: APIWrapper<Parameter> {
     public init(
         specialBaseURL: URL? = nil,
-        path: String,
+        _ path: String,
         header: HeaderBuilder? = nil,
         parameter: ParameterBuilder? = nil,
         parameterEncoding: ParameterEncoding? = nil
@@ -38,7 +38,7 @@ public final class POST<Parameter>: APIWrapper<Parameter> {
 public final class GET<Parameter>: APIWrapper<Parameter> {
     public init(
         specialBaseURL: URL? = nil,
-        path: String,
+        _ path: String,
         header: HeaderBuilder? = nil,
         parameter: ParameterBuilder? = nil,
         parameterEncoding: ParameterEncoding? = nil
