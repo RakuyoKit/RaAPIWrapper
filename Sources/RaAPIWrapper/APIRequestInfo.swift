@@ -29,4 +29,20 @@ public struct APIRequestInfo: APIRequestInfoProtocol {
     
     /// Encoding of `parameters`
     public let parameterEncoding: ParameterEncoding?
+    
+    public init(
+        specialBaseURL: URL? = nil,
+        path: String,
+        method: HTTPMethod,
+        header: Header? = nil,
+        parameters: Parameters? = nil,
+        parameterEncoding: ParameterEncoding? = nil
+    ) {
+        self.specialBaseURL = specialBaseURL
+        self.path = path
+        self.method = method
+        self.header = header
+        self.parameters = parameters
+        self.parameterEncoding = parameterEncoding
+    }
 }
