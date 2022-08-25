@@ -1,23 +1,23 @@
-# pod lib lint --verbose --allow-warnings APIWrapper.podspec
-# pod trunk push --verbose --allow-warnings APIWrapper.podspec
+# pod lib lint --verbose --allow-warnings RaAPIWrapper.podspec
+# pod trunk push --verbose --allow-warnings RaAPIWrapper.podspec
 
 Pod::Spec.new do |s|
   
-  s.name             = 'APIWrapper'
+  s.name             = 'RaAPIWrapper'
   
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   
   s.summary          = 'Wrappers for requesting api.'
   
   s.description      = 'Provide the necessary data for the requesting api in a more aggregated form.'
   
-  s.homepage         = 'https://github.com/rakuyoMo/APIWrapper'
+  s.homepage         = 'https://github.com/rakuyoMo/RaAPIWrapper'
   
   s.license          = 'MIT'
   
   s.author           = { 'Rakuyo' => 'rakuyo.mo@gmail.com' }
   
-  s.source           = { :git => 'https://github.com/rakuyoMo/APIWrapper.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/rakuyoMo/RaAPIWrapper.git', :tag => s.version.to_s }
   
   s.requires_arc     = true
 
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   
   s.module_name      = 'APIWrapper'
   
-  s.source_files     = 'Sources/APIWrapper/*'
+  s.source_files     = 'Sources/RaAPIWrapper/*'
 
   s.dependency 'Alamofire'
   
