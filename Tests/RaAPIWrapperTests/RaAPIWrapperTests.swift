@@ -1,5 +1,5 @@
 import XCTest
-@testable import APIWrapper
+@testable import RaAPIWrapper
 
 struct TestAPI {
     @POST(path: "", parameter: { ["id": $0.id, "name": $0.name] })
@@ -12,7 +12,7 @@ struct TestAPI {
     static var noParamAPI: (()) -> APIRequestInfo
 }
 
-final class APIWrapperTests: XCTestCase {
+final class RaAPIWrapperTests: XCTestCase {
     func testExample() throws {
         
         let info = TestAPI.arrayParamAPI(["123", "333"])
