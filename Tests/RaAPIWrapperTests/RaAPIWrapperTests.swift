@@ -2,13 +2,13 @@ import XCTest
 @testable import RaAPIWrapper
 
 struct TestAPI {
-    @POST(path: "", parameter: { ["id": $0.id, "name": $0.name] })
+    @POST("", parameter: { ["id": $0.id, "name": $0.name] })
     static var hasParamAPI: ((id: Int, name: String)) -> APIRequestInfo
     
-    @POST(path: "", parameter: { $0 })
+    @POST("", parameter: { $0 })
     static var arrayParamAPI: ([String]) -> APIRequestInfo
     
-    @GET(path: "", header: { _ in [:] })
+    @GET("", header: { _ in [:] })
     static var noParamAPI: (()) -> APIRequestInfo
 }
 
