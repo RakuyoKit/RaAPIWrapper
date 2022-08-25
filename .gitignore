@@ -89,3 +89,12 @@ fastlane/test_output
 
 iOSInjectionProject/
 .DS_Store
+
+# For SPM
+
+/.build
+/Packages
+/*.xcodeproj
+.swiftpm/config/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
