@@ -38,8 +38,8 @@ open class APIWrapper<Parameter>: APIRequestInfoProtocol {
     private let parameterBuilder: ParameterBuilder?
     
     public init(
-        specialBaseURL: URL? = nil,
         path: String,
+        specialBaseURL: URL? = nil,
         method: HTTPMethod,
         header: HeaderBuilder? = nil,
         parameter: ParameterBuilder? = nil,
@@ -56,8 +56,8 @@ open class APIWrapper<Parameter>: APIRequestInfoProtocol {
     open var wrappedValue: (Parameter) -> APIRequestInfo {
         return {
             .init(
-                specialBaseURL: self.specialBaseURL,
                 path: self.path,
+                specialBaseURL: self.specialBaseURL,
                 method: self.method,
                 header: self.headerBuilder?($0),
                 parameters: self.parameterBuilder?($0).toParameter,

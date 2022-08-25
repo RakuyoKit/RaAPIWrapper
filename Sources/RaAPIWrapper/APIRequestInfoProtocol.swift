@@ -24,13 +24,13 @@ public protocol APIRequestInfoProtocol {
     /// Encoding of `Parameters`
     typealias ParameterEncoding = Alamofire.ParameterEncoding
     
+    /// The path to the requested api
+    var path: String { get }
+    
     /// A special api base url.
     ///
     /// Should be a setting item independent of your global configuration.
     var specialBaseURL: URL? { get }
-    
-    /// The path to the requested api
-    var path: String { get }
     
     /// Type representing HTTP methods
     var method: HTTPMethod { get }
