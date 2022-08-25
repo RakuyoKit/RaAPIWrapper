@@ -28,5 +28,7 @@ Pod::Spec.new do |s|
   s.module_name      = 'APIWrapper'
   
   s.source_files     = 'Sources/APIWrapper/*'
+
+  s.dependency 'Alamofire'
   
 end
