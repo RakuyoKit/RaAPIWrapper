@@ -12,10 +12,20 @@ fileprivate var _method: APIHTTPMethod = .post
 
 /// Encapsulates the data needed to request the `POST` api.
 @propertyWrapper
-public final class POST<A>: API<A> {
+public final class POST: API {
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var projectedValue: POST<A> { self }
+    public override var projectedValue: POST { self }
+    
+    public override var wrappedValue: () -> APIRequestInfo { super.wrappedValue }
+}
+
+/// Encapsulates the data needed to request the `POST` api.
+@propertyWrapper
+public final class POST1<A>: API1<A> {
+    public override class var defaultMethod: APIHTTPMethod? { _method }
+    
+    public override var projectedValue: POST1<A> { self }
     
     public override var wrappedValue: (A) -> APIRequestInfo { super.wrappedValue }
 }
