@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   
   s.module_name      = 'APIWrapper'
   
-  s.source_files     = 'Sources/RaAPIWrapper/*'
+  s.source_files     = 'Sources/RaAPIWrapper/*', 'Sources/RaAPIWrapper/*/*'
 
   s.dependency 'Alamofire'
   

@@ -1,5 +1,5 @@
 //
-//  APIRequestInfoProtocol.swift
+//  APIInfoProtocol.swift
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/8/25.
@@ -10,20 +10,20 @@ import Foundation
 
 import Alamofire
 
+/// Type representing HTTP methods
+public typealias APIHTTPMethod = Alamofire.HTTPMethod
+
+/// API header
+public typealias APIHeaders = [String: String]
+
+/// API parameters
+public typealias APIParameters = Encodable
+
+/// Encoding of `Parameters`
+public typealias APIParameterEncoding = Alamofire.ParameterEncoding
+
 /// Describe the data needed for an api
-public protocol APIRequestInfoProtocol {
-    /// Type representing HTTP methods
-    typealias HTTPMethod = Alamofire.HTTPMethod
-    
-    /// API header
-    typealias Header = [String: String]
-    
-    /// API parameters
-    typealias Parameters = Encodable
-    
-    /// Encoding of `Parameters`
-    typealias ParameterEncoding = Alamofire.ParameterEncoding
-    
+public protocol APIInfoProtocol {
     /// The path to the requested api
     var path: String { get }
     
@@ -33,8 +33,8 @@ public protocol APIRequestInfoProtocol {
     var specialBaseURL: URL? { get }
     
     /// Type representing HTTP methods
-    var method: HTTPMethod { get }
+    var method: APIHTTPMethod { get }
     
     /// Encoding of `Parameters`
-    var parameterEncoding: ParameterEncoding? { get }
+    var parameterEncoding: APIParameterEncoding? { get }
 }

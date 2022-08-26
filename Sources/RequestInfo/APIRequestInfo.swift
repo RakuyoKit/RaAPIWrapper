@@ -9,7 +9,7 @@
 import Foundation
 
 /// Information needed to request the api
-public struct APIRequestInfo: APIRequestInfoProtocol {
+public struct APIRequestInfo: APIInfoProtocol {
     /// The path to the requested api
     public let path: String
     
@@ -19,24 +19,24 @@ public struct APIRequestInfo: APIRequestInfoProtocol {
     public let specialBaseURL: URL?
     
     /// Type representing HTTP methods
-    public let method: HTTPMethod
+    public let method: APIHTTPMethod
     
     /// API header
-    public let header: Header?
+    public let header: APIHeaders?
     
     /// Parameters of the requested api
-    public let parameters: Parameters?
+    public let parameters: APIParameters?
     
     /// Encoding of `parameters`
-    public let parameterEncoding: ParameterEncoding?
+    public let parameterEncoding: APIParameterEncoding?
     
     public init(
         path: String,
         specialBaseURL: URL? = nil,
-        method: HTTPMethod,
-        header: Header? = nil,
-        parameters: Parameters? = nil,
-        parameterEncoding: ParameterEncoding? = nil
+        method: APIHTTPMethod,
+        header: APIHeaders? = nil,
+        parameters: APIParameters? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
     ) {
         self.path = path
         self.specialBaseURL = specialBaseURL
