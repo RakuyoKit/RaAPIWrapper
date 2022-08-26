@@ -8,23 +8,23 @@
 
 import Foundation
 
-public protocol APIParameters {
+public protocol APIParameter {
     /// Converts the target to an Encodable-compliant type.
-    var toParameter: Encodable { get }
+    var toParameters: Encodable { get }
 }
 
 // MARK: - Array
 
-extension Array: APIParameters {
-    public var toParameter: Encodable {
+extension Array: APIParameter {
+    public var toParameters: Encodable {
         lazy.compactMap { $0 as? Encodable }.map { AnyEncodable($0) }
     }
 }
 
 // MARK: - Dictionary
 
-extension Dictionary: APIParameters where Key == String {
-    public var toParameter: Encodable {
+extension Dictionary: APIParameter where Key == String {
+    public var toParameters: Encodable {
         compactMapValues { $0 as? Encodable }.mapValues { AnyEncodable($0) }
     }
 }
