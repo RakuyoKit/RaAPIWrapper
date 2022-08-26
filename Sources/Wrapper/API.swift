@@ -61,8 +61,27 @@ open class BaseAPI<HeaderBuilder, ParameterBuilder>: APIInfoProtocol {
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API<A>: BaseAPI<(A) -> APIHeaders, (A) -> APIParameter> {
-    public var projectedValue: API<A> { self }
+open class API: BaseAPI<() -> APIHeaders, () -> APIParameter> {
+    public var projectedValue: API { self }
+    
+    open var wrappedValue: () -> APIRequestInfo {
+        return {
+            .init(
+                path: self.path,
+                specialBaseURL: self.specialBaseURL,
+                method: self.method,
+                header: self.headerBuilder?(),
+                parameters: self.parameterBuilder?().toParameters,
+                parameterEncoding: self.parameterEncoding
+            )
+        }
+    }
+}
+
+/// API wrapper. Used to wrap the data needed to request an api.
+@propertyWrapper
+open class API1<A>: BaseAPI<(A) -> APIHeaders, (A) -> APIParameter> {
+    public var projectedValue: API1<A> { self }
     
     open var wrappedValue: (A) -> APIRequestInfo {
         return {
