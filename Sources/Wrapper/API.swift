@@ -8,7 +8,9 @@
 
 import Foundation
 
-open class BaseAPI<HeaderBuilder, ParameterBuilder>: APIInfoProtocol {
+open class BaseAPI<H>: APIInfoProtocol {
+    public typealias HeaderBuilder = H
+    
     /// A special api base url.
     ///
     /// Should be a setting item independent of your global configuration.
@@ -23,9 +25,6 @@ open class BaseAPI<HeaderBuilder, ParameterBuilder>: APIInfoProtocol {
     /// Used to construct the api request header
     public let headerBuilder: HeaderBuilder?
     
-    /// Used to construct the api request parameter
-    public let parameterBuilder: ParameterBuilder?
-    
     /// Encoding of `Parameters`
     public let parameterEncoding: APIParameterEncoding?
     
@@ -36,18 +35,16 @@ open class BaseAPI<HeaderBuilder, ParameterBuilder>: APIInfoProtocol {
     /// You can configure the request method uniformly with this property in the `API` subclass.
     open class var defaultMethod: APIHTTPMethod? { nil }
     
-    public init(
-        _ path: String,
+    fileprivate init(
+        path: String,
         specialBaseURL: URL? = nil,
         method: APIHTTPMethod? = nil,
         header: HeaderBuilder? = nil,
-        parameter: ParameterBuilder? = nil,
         parameterEncoding: APIParameterEncoding? = nil
     ) {
         self.specialBaseURL = specialBaseURL
         self.path = path
         self.headerBuilder = header
-        self.parameterBuilder = parameter
         self.parameterEncoding = parameterEncoding
         
         let _method = Self.defaultMethod ?? method
@@ -61,171 +58,231 @@ open class BaseAPI<HeaderBuilder, ParameterBuilder>: APIInfoProtocol {
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API: BaseAPI<() -> APIHeaders, () -> APIParameter> {
+open class API: BaseAPI<() -> APIHeaders> {
+    public typealias ParameterBuilder = () -> Void
+    
     public var projectedValue: API { self }
     
-    open var wrappedValue: () -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?(),
-                parameters: self.parameterBuilder?().toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public var wrappedValue: ParameterBuilder
+    
+    public func createRequestInfo() -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(),
+            parameters: nil,
+            parameterEncoding: self.parameterEncoding
+        )
+    }
+    
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API1<A>: BaseAPI<(A) -> APIHeaders, (A) -> APIParameter> {
+open class API1<A>: BaseAPI<(A) -> APIHeaders> {
+    public typealias ParameterBuilder = (A) -> APIParameter
+    
     public var projectedValue: API1<A> { self }
     
-    open var wrappedValue: (A) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0),
-                parameters: self.parameterBuilder?($0).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public var wrappedValue: ParameterBuilder
+    
+    public func createRequestInfo(_ a: A) -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(a),
+            parameters: self.wrappedValue(a).toParameters,
+            parameterEncoding: self.parameterEncoding
+        )
+    }
+    
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API2<A, B>: BaseAPI<(A, B) -> APIHeaders, (A, B) -> APIParameter> {
+open class API2<A, B>: BaseAPI<(A, B) -> APIHeaders> {
+    public typealias ParameterBuilder = (A, B) -> APIParameter
+    
     public var projectedValue: API2<A, B> { self }
+
+    public var wrappedValue: ParameterBuilder
     
-    open var wrappedValue: (A, B) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1),
-                parameters: self.parameterBuilder?($0, $1).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public func createRequestInfo(_ a: A, _ b: B) -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(a, b),
+            parameters: self.wrappedValue(a, b).toParameters,
+            parameterEncoding: self.parameterEncoding
+        )
+    }
+    
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API3<A, B, C>: BaseAPI<(A, B, C) -> APIHeaders, (A, B, C) -> APIParameter> {
+open class API3<A, B, C>: BaseAPI<(A, B, C) -> APIHeaders> {
+    public typealias ParameterBuilder = (A, B, C) -> APIParameter
+    
     public var projectedValue: API3<A, B, C> { self }
+
+    public var wrappedValue: ParameterBuilder
     
-    open var wrappedValue: (A, B, C) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1, $2),
-                parameters: self.parameterBuilder?($0, $1, $2).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public func createRequestInfo(_ a: A, _ b: B, _ c: C) -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(a, b, c),
+            parameters: self.wrappedValue(a, b, c).toParameters,
+            parameterEncoding: self.parameterEncoding
+        )
+    }
+    
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API4<A, B, C, D>: BaseAPI<(A, B, C, D) -> APIHeaders, (A, B, C, D) -> APIParameter> {
+open class API4<A, B, C, D>: BaseAPI<(A, B, C, D) -> APIHeaders> {
+    public typealias ParameterBuilder = (A, B, C, D) -> APIParameter
+    
     public var projectedValue: API4<A, B, C, D> { self }
+
+    public var wrappedValue: ParameterBuilder
     
-    open var wrappedValue: (A, B, C, D) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1, $2, $3),
-                parameters: self.parameterBuilder?($0, $1, $2, $3).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public func createRequestInfo(_ a: A, _ b: B, _ c: C, _ d: D) -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(a, b, c, d),
+            parameters: self.wrappedValue(a, b, c, d).toParameters,
+            parameterEncoding: self.parameterEncoding
+        )
+    }
+    
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API5<A, B, C, D, E>: BaseAPI<(A, B, C, D, E) -> APIHeaders, (A, B, C, D, E) -> APIParameter> {
+open class API5<A, B, C, D, E>: BaseAPI<(A, B, C, D, E) -> APIHeaders> {
+    public typealias ParameterBuilder = (A, B, C, D, E) -> APIParameter
+    
     public var projectedValue: API5<A, B, C, D, E> { self }
+
+    public var wrappedValue: ParameterBuilder
     
-    open var wrappedValue: (A, B, C, D, E) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1, $2, $3, $4),
-                parameters: self.parameterBuilder?($0, $1, $2, $3, $4).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public func createRequestInfo(_ a: A, _ b: B, _ c: C, _ d: D, _ e: E) -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(a, b, c, d, e),
+            parameters: self.wrappedValue(a, b, c, d, e).toParameters,
+            parameterEncoding: self.parameterEncoding
+        )
+    }
+    
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API6<A, B, C, D, E, F>: BaseAPI<(A, B, C, D, E, F) -> APIHeaders, (A, B, C, D, E, F) -> APIParameter> {
+open class API6<A, B, C, D, E, F>: BaseAPI<(A, B, C, D, E, F) -> APIHeaders> {
+    public typealias ParameterBuilder = (A, B, C, D, E, F) -> APIParameter
+    
     public var projectedValue: API6<A, B, C, D, E, F> { self }
-    
-    open var wrappedValue: (A, B, C, D, E, F) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1, $2, $3, $4, $5),
-                parameters: self.parameterBuilder?($0, $1, $2, $3, $4, $5).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
-    }
-}
 
-/// API wrapper. Used to wrap the data needed to request an api.
-@propertyWrapper
-open class API7<A, B, C, D, E, F, G>: BaseAPI<(A, B, C, D, E, F, G) -> APIHeaders, (A, B, C, D, E, F, G) -> APIParameter> {
-    public var projectedValue: API7<A, B, C, D, E, F, G> { self }
+    public var wrappedValue: ParameterBuilder
     
-    open var wrappedValue: (A, B, C, D, E, F, G) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1, $2, $3, $4, $5, $6),
-                parameters: self.parameterBuilder?($0, $1, $2, $3, $4, $5, $6).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public func createRequestInfo(_ a: A, _ b: B, _ c: C, _ d: D, _ e: E, _ f: F) -> APIRequestInfo {
+        return .init(
+            path: self.path,
+            specialBaseURL: self.specialBaseURL,
+            method: self.method,
+            header: self.headerBuilder?(a, b, c, d, e, f),
+            parameters: self.wrappedValue(a, b, c, d, e, f).toParameters,
+            parameterEncoding: self.parameterEncoding
+        )
     }
-}
-
-/// API wrapper. Used to wrap the data needed to request an api.
-@propertyWrapper
-open class API8<A, B, C, D, E, F, G, H>: BaseAPI<(A, B, C, D, E, F, G, H) -> APIHeaders, (A, B, C, D, E, F, G, H) -> APIParameter> {
-    public var projectedValue: API8<A, B, C, D, E, F, G, H> { self }
     
-    open var wrappedValue: (A, B, C, D, E, F, G, H) -> APIRequestInfo {
-        return {
-            .init(
-                path: self.path,
-                specialBaseURL: self.specialBaseURL,
-                method: self.method,
-                header: self.headerBuilder?($0, $1, $2, $3, $4, $5, $6, $7),
-                parameters: self.parameterBuilder?($0, $1, $2, $3, $4, $5, $6, $7).toParameters,
-                parameterEncoding: self.parameterEncoding
-            )
-        }
+    public init(
+        wrappedValue: @escaping ParameterBuilder,
+        _ path: String,
+        specialBaseURL: URL? = nil,
+        method: APIHTTPMethod? = nil,
+        header: HeaderBuilder? = nil,
+        parameterEncoding: APIParameterEncoding? = nil
+    ) {
+        self.wrappedValue = wrappedValue
+        super.init(path: path, specialBaseURL: specialBaseURL, method: method, header: header, parameterEncoding: parameterEncoding)
     }
 }

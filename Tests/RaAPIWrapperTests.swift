@@ -2,52 +2,31 @@ import XCTest
 @testable import APIWrapper
 
 struct TestAPI {
+    @POST("/api/v1/no_param")
+    static var noParamAPI: () -> Void = {}
     
-    @POST1("/api/v1/api", parameter: {
-        ["id": $0]
-    })
-    static var api: (_ id: Int) -> APIRequestInfo
-    
-    @POST2("/api/v1/two_param", parameter: {
-        ["id": $0, "name": $1]
-    })
-    static var twoParamAPI: (_ id: Int, _ name: String) -> APIRequestInfo
-    
-    @POST1("/api/v1/tuple_param", parameter: {
+    @POST1("/api/v1/tuple_param")
+    static var tupleParamAPI: ((id: Int, name: String)) -> APIParameter = {
         ["id": $0.id, "name": $0.name]
-    })
-    static var tupleParamAPI: ((id: Int, name: String)) -> APIRequestInfo
+    }
+
+    @POST2("/api/v1/two_param")
+    static var twoParamAPI: (_ id: Int, _ name: String) -> APIParameter = {
+        ["id": $0, "name": $1]
+    }
     
-    @POST1("/api/v1/array_param", parameter: {
-        $0
-    })
-    static var arrayParamAPI: (_ array: [String]) -> APIRequestInfo
-    
-    @GET("/api/v1/no_param")
-    static var noParamAPI: () -> APIRequestInfo
+    @POST1("/api/v1/array_param")
+    static var arrayParamAPI: (_ array: [String]) -> APIParameter = { $0 }
 }
 
 final class RaAPIWrapperTests: XCTestCase {
     func testExample() throws {
+        print(TestAPI.$noParamAPI.createRequestInfo())
         
+        print(TestAPI.$tupleParamAPI.createRequestInfo((id: 1, name: "String")))
         
-        print(type(of: TestAPI.$arrayParamAPI).defaultMethod)
+        print(TestAPI.$twoParamAPI.createRequestInfo(0, "123"))
         
-//        let info = TestAPI.arrayParamAPI(["123", "333"])
-//
-//        print(info.parameters)
-        
-//        TestAPI.hasParamAPI(0, "123")
-        
-        
-//        TestAPI.$arrayParamAPI.
-        
-        func foo(a: String, b: String) -> String {
-            return ""
-        }
-        
-        
-        
-        
+        print(TestAPI.$arrayParamAPI.createRequestInfo(["123"]))
     }
 }
