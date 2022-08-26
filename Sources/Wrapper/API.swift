@@ -50,10 +50,12 @@ open class BaseAPI<HeaderBuilder, ParameterBuilder>: APIInfoProtocol {
         self.parameterBuilder = parameter
         self.parameterEncoding = parameterEncoding
         
-        guard let _method = Self.defaultMethod ?? method else {
-            assert(false, "No request method specified! Please set the request method via the `defaultMethod` property or the `init.method` parameter.")
-        }
-        self.method = _method
+        let _method = Self.defaultMethod ?? method
+        
+        assert(_method != nil,
+               "No request method specified! Please set the request method via the `defaultMethod` property or the `init.method` parameter.")
+        
+        self.method = _method!
     }
 }
 
