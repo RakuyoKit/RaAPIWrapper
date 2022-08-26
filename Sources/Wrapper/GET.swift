@@ -17,7 +17,7 @@ public final class GET: API {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }
@@ -30,7 +30,7 @@ public final class GET1<A>: API1<A> {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }
@@ -43,7 +43,7 @@ public final class GET2<A, B>: API2<A, B> {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }
@@ -56,7 +56,7 @@ public final class GET3<A, B, C>: API3<A, B, C> {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }
@@ -69,7 +69,7 @@ public final class GET4<A, B, C, D>: API4<A, B, C, D> {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }
@@ -82,7 +82,7 @@ public final class GET5<A, B, C, D, E>: API5<A, B, C, D, E> {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }
@@ -95,7 +95,7 @@ public final class GET6<A, B, C, D, E, F>: API6<A, B, C, D, E, F> {
     
     public override class var defaultMethod: APIHTTPMethod? { _method }
     
-    public override var wrappedValue: ParameterBuilder {
+    public override var wrappedValue: ParameterBuilder? {
         get { super.wrappedValue }
         set { super.wrappedValue = newValue }
     }

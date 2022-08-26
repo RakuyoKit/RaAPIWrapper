@@ -3,20 +3,20 @@ import XCTest
 
 struct TestAPI {
     @POST("/api/v1/no_param")
-    static var noParamAPI: () -> Void = {}
+    static var noParamAPI: NoInputParameterBuilder? = nil
     
     @POST1("/api/v1/tuple_param")
-    static var tupleParamAPI: ((id: Int, name: String)) -> APIParameter = {
+    static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String)>? = {
         ["id": $0.id, "name": $0.name]
     }
-
+    
     @POST2("/api/v1/two_param")
-    static var twoParamAPI: (_ id: Int, _ name: String) -> APIParameter = {
+    static var twoParamAPI: ((_ id: Int, _ name: String) -> APIParameter)? = {
         ["id": $0, "name": $1]
     }
     
     @POST1("/api/v1/array_param")
-    static var arrayParamAPI: (_ array: [String]) -> APIParameter = { $0 }
+    static var arrayParamAPI: APIParameterBuilder<[String]>? = { $0 }
 }
 
 final class RaAPIWrapperTests: XCTestCase {
