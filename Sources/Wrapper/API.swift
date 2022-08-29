@@ -29,9 +29,6 @@ open class API<Parameter>: APIInfoProtocol {
     /// The path to the requested api
     public let path: String
     
-    /// Mapping model of the data returned by the api.
-    public let decodeType: Decodable?
-    
     /// Type representing HTTP methods
     public let method: APIHTTPMethod
     
@@ -44,7 +41,6 @@ open class API<Parameter>: APIInfoProtocol {
     public init(
         wrappedValue: ParameterBuilder? = nil,
         _ path: String,
-        decodeType: Decodable? = nil,
         specialBaseURL: URL? = nil,
         method: APIHTTPMethod? = nil,
         header: HeaderBuilder? = nil,
@@ -52,7 +48,6 @@ open class API<Parameter>: APIInfoProtocol {
     ) {
         self.wrappedValue = wrappedValue
         self.path = path
-        self.decodeType = decodeType
         self.specialBaseURL = specialBaseURL
         self.headerBuilder = header
         self.parameterEncoding = parameterEncoding
@@ -84,5 +79,17 @@ open class API<Parameter>: APIInfoProtocol {
             parameters: self.wrappedValue?(parameter).toParameters,
             parameterEncoding: self.parameterEncoding
         )
+    }
+}
+
+// MARK: - Hashable
+
+extension API: Hashable {
+    public static func == (lhs: API<Parameter>, rhs: API<Parameter>) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
 }
