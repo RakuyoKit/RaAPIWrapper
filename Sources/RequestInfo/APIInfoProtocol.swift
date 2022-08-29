@@ -27,9 +27,6 @@ public protocol APIInfoProtocol {
     /// The path to the requested api.
     var path: String { get }
     
-    /// Mapping model of the data returned by the api.
-    var decodeType: Decodable? { get }
-    
     /// A special api base url.
     ///
     /// Should be a setting item independent of your global configuration.

@@ -33,7 +33,6 @@ public final class AnyAPI: API<Any> {
                 return { builder($0 as! P) }
             }(),
             api.path,
-            decodeType: api.decodeType,
             specialBaseURL: api.specialBaseURL,
             method: api.method,
             header: {

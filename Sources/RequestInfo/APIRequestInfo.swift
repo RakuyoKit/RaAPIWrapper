@@ -13,9 +13,6 @@ public struct APIRequestInfo: APIInfoProtocol {
     /// The path to the requested api
     public let path: String
     
-    /// Mapping model of the data returned by the api.
-    public let decodeType: Decodable?
-    
     /// A special api base url.
     ///
     /// Should be a setting item independent of your global configuration.
@@ -35,7 +32,6 @@ public struct APIRequestInfo: APIInfoProtocol {
     
     public init(
         path: String,
-        decodeType: Decodable? = nil,
         specialBaseURL: URL? = nil,
         method: APIHTTPMethod,
         header: APIHeaders? = nil,
@@ -43,7 +39,6 @@ public struct APIRequestInfo: APIInfoProtocol {
         parameterEncoding: APIParameterEncoding? = nil
     ) {
         self.path = path
-        self.decodeType = decodeType
         self.specialBaseURL = specialBaseURL
         self.method = method
         self.header = header
