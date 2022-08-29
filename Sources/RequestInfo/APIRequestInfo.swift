@@ -46,3 +46,21 @@ public struct APIRequestInfo: APIInfoProtocol {
         self.parameterEncoding = parameterEncoding
     }
 }
+
+// MARK: - Hashable
+
+extension APIRequestInfo: Hashable {
+    public static func == (lhs: APIRequestInfo, rhs: APIRequestInfo) -> Bool {
+        return lhs.path == rhs.path &&
+        lhs.specialBaseURL == rhs.specialBaseURL &&
+        lhs.method == rhs.method &&
+        lhs.header == rhs.header
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(path)
+        hasher.combine(specialBaseURL)
+        hasher.combine(method)
+        hasher.combine(header)
+    }
+}

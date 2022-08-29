@@ -23,7 +23,7 @@ public typealias APIParameters = Encodable
 public typealias APIParameterEncoding = Alamofire.ParameterEncoding
 
 /// Describe the data needed for an api.
-public protocol APIInfoProtocol {
+public protocol APIInfoProtocol: Hashable {
     /// The path to the requested api.
     var path: String { get }
     

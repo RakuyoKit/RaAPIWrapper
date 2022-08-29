@@ -81,3 +81,15 @@ open class API<Parameter>: APIInfoProtocol {
         )
     }
 }
+
+// MARK: - Hashable
+
+extension API: Hashable {
+    public static func == (lhs: API<Parameter>, rhs: API<Parameter>) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+    }
+}
