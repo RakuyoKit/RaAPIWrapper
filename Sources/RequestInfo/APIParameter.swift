@@ -25,6 +25,6 @@ extension Array: APIParameter {
 
 extension Dictionary: APIParameter where Key == String {
     public var toParameters: Encodable {
-        compactMapValues { $0 as? Encodable }.mapValues { AnyEncodable($0) }
+        (self as [String: Any?]).compactMapValues { $0 as? Encodable }.mapValues { AnyEncodable($0) }
     }
 }
