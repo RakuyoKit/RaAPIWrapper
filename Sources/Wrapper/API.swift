@@ -29,6 +29,9 @@ open class API<Parameter>: APIInfoProtocol {
     /// The path to the requested api
     public let path: String
     
+    /// Mapping model of the data returned by the api.
+    public let decodeType: Decodable?
+    
     /// Type representing HTTP methods
     public let method: APIHTTPMethod
     
@@ -41,19 +44,20 @@ open class API<Parameter>: APIInfoProtocol {
     public init(
         wrappedValue: ParameterBuilder? = nil,
         _ path: String,
+        decodeType: Decodable? = nil,
         specialBaseURL: URL? = nil,
         method: APIHTTPMethod? = nil,
         header: HeaderBuilder? = nil,
         parameterEncoding: APIParameterEncoding? = nil
     ) {
         self.wrappedValue = wrappedValue
-        self.specialBaseURL = specialBaseURL
         self.path = path
+        self.decodeType = decodeType
+        self.specialBaseURL = specialBaseURL
         self.headerBuilder = header
         self.parameterEncoding = parameterEncoding
         
         let _method = Self.defaultMethod ?? method
-        
         assert(_method != nil,
                "No request method specified! Please set the request method via the `defaultMethod` property or the `init.method` parameter.")
         
