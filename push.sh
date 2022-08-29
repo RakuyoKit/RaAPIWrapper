@@ -50,14 +50,16 @@ release(){
     pod trunk push $name.podspec --allow-warnings --skip-tests
 }
 
-echo "Whether to skip local verification? [Y/N]？"
-if read -t 5 is_skip_lint; then
-    case $is_skip_lint in
-    (N | n)
-        lintLib && release;;
-    (*)
-        release;;
-    esac
-else
-    release
-fi
+lintLib && release
+
+#echo "Whether to skip local verification? [Y/N]？"
+#if read -t 5 is_skip_lint; then
+#    case $is_skip_lint in
+#    (N | n)
+#        lintLib && release;;
+#    (*)
+#        release;;
+#    esac
+#else
+#    release
+#fi
