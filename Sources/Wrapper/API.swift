@@ -19,7 +19,7 @@ open class API<Parameter>: APIInfoProtocol {
     public typealias ParameterBuilder = APIParameterBuilder<Parameter>
     
     /// Parameter constructor for the api.
-    public var wrappedValue: ParameterBuilder?
+    open var wrappedValue: ParameterBuilder?
     
     /// A special api base url.
     ///
@@ -67,10 +67,10 @@ open class API<Parameter>: APIInfoProtocol {
     open class var defaultMethod: APIHTTPMethod? { nil }
     
     ///
-    public var projectedValue: API<Parameter> { self }
+    open var projectedValue: API<Parameter> { self }
     
     ///
-    public func createRequestInfo(_ parameter: Parameter) -> APIRequestInfo {
+    open func createRequestInfo(_ parameter: Parameter) -> APIRequestInfo {
         return .init(
             path: self.path,
             specialBaseURL: self.specialBaseURL,
@@ -89,7 +89,7 @@ extension API: Hashable {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
     
-    public func hash(into hasher: inout Hasher) {
+    open func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self))
     }
 }

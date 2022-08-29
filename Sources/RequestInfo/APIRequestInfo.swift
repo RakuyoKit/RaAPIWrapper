@@ -9,7 +9,7 @@
 import Foundation
 
 /// Information needed to request the api
-public struct APIRequestInfo: APIInfoProtocol {
+open class APIRequestInfo: APIInfoProtocol {
     /// The path to the requested api
     public let path: String
     
@@ -51,16 +51,10 @@ public struct APIRequestInfo: APIInfoProtocol {
 
 extension APIRequestInfo: Hashable {
     public static func == (lhs: APIRequestInfo, rhs: APIRequestInfo) -> Bool {
-        return lhs.path == rhs.path &&
-        lhs.specialBaseURL == rhs.specialBaseURL &&
-        lhs.method == rhs.method &&
-        lhs.header == rhs.header
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(path)
-        hasher.combine(specialBaseURL)
-        hasher.combine(method)
-        hasher.combine(header)
+        hasher.combine(ObjectIdentifier(self))
     }
 }
