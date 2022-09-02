@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct AnyEncodable {
+struct AnyEncodable {
     private let encodable: Encodable
     
-    public init(_ encodable: Encodable) {
+    init(_ encodable: Encodable) {
         self.encodable = encodable
     }
 }
@@ -19,7 +19,7 @@ public struct AnyEncodable {
 // MARK: - Encodable
 
 extension AnyEncodable: Encodable {
-    public func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         try encodable.encode(to: encoder)
     }
 }
