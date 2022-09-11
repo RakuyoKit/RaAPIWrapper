@@ -13,11 +13,17 @@ public protocol APIParameter {
     var toParameters: Encodable { get }
 }
 
+// MARK: - Default
+
+extension APIParameter where Self: Encodable {
+    public var toParameters: Encodable { self }
+}
+
 // MARK: - Array
 
 extension Array: APIParameter {
     public var toParameters: Encodable {
-        lazy.compactMap { $0 as? Encodable }.map { AnyEncodable($0) }
+        (self as [Any?]).lazy.compactMap { $0 as? Encodable }.map { AnyEncodable($0) }
     }
 }
 
