@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   
   s.name             = 'RaAPIWrapper'
   
-  s.version          = '0.8.0'
+  s.version          = '0.8.1'
   
   s.summary          = 'Wrappers for requesting api.'
   
