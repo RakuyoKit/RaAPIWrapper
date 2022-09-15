@@ -23,7 +23,13 @@ extension APIParameter where Self: Encodable {
 
 extension Array: APIParameter {
     public var toParameters: Encodable {
-        (self as [Any?]).lazy.compactMap { $0 as? Encodable }.map { AnyEncodable($0) }
+        (self as [Any?])
+            .lazy
+            .compactMap {
+                if let value = $0 as? APIParameter { return value.toParameters }
+                return $0 as? Encodable
+            }
+            .map { AnyEncodable($0) }
     }
 }
 
@@ -31,6 +37,11 @@ extension Array: APIParameter {
 
 extension Dictionary: APIParameter where Key == String {
     public var toParameters: Encodable {
-        (self as [String: Any?]).compactMapValues { $0 as? Encodable }.mapValues { AnyEncodable($0) }
+        (self as [String: Any?])
+            .compactMapValues {
+                if let value = $0 as? APIParameter { return value.toParameters }
+                return $0 as? Encodable
+            }
+            .mapValues { AnyEncodable($0) }
     }
 }

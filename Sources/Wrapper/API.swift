@@ -89,7 +89,7 @@ extension API: Hashable {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
     
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self))
     }
 }
