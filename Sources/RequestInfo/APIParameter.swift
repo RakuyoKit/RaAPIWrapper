@@ -26,8 +26,9 @@ extension Array: APIParameter {
         (self as [Any?])
             .lazy
             .compactMap {
+                if let value = $0 as? Encodable { return value }
                 if let value = $0 as? APIParameter { return value.toParameters }
-                return $0 as? Encodable
+                return mapAnyObjectToEncodable($0 as? AnyObject)
             }
             .map { AnyEncodable($0) }
     }
@@ -39,9 +40,28 @@ extension Dictionary: APIParameter where Key == String {
     public var toParameters: Encodable {
         (self as [String: Any?])
             .compactMapValues {
+                if let value = $0 as? Encodable { return value }
                 if let value = $0 as? APIParameter { return value.toParameters }
-                return $0 as? Encodable
+                return mapAnyObjectToEncodable($0 as? AnyObject)
             }
             .mapValues { AnyEncodable($0) }
+    }
+}
+
+// MARK: - Tools
+
+fileprivate extension APIParameter {
+    func mapAnyObjectToEncodable(_ value: AnyObject?) -> Encodable? {
+        guard let _value = value else { return nil }
+        
+        if let result = _value as? String { return result }
+        if let result = _value as? Int { return result }
+        if let result = _value as? Double { return result }
+        if let result = _value as? Bool { return result }
+        if let result = _value as? Data { return result }
+        if let result = _value as? [String: Any] { return result.toParameters }
+        if let result = _value as? [Any] { return result.toParameters }
+        
+        return nil
     }
 }

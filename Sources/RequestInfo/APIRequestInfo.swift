@@ -58,3 +58,11 @@ extension APIRequestInfo: Hashable {
         hasher.combine(ObjectIdentifier(self))
     }
 }
+
+// MARK: - CustomStringConvertible
+
+extension APIRequestInfo: CustomStringConvertible {
+    public var description: String {
+        "specialBaseURL: \(specialBaseURL?.absoluteString ?? "nil"); path: \(path); method: \(method.rawValue); header: \(header?.description ?? "nil"); parameters: \(String(describing: parameters)); parameterEncoding: \(String(describing: parameterEncoding))"
+    }
+}
