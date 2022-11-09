@@ -13,7 +13,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "git@git.iqlcd.com:mobile/ios/resources/components/github/Alamofire.git",
+            url: "https://github.com/Alamofire/Alamofire.git",
             from: "5.6.2"
         ),
     ],
