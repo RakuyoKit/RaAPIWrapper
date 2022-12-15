@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   
   s.name             = 'RaAPIWrapper'
   
-  s.version          = '0.8.3'
+  s.version          = '0.9.0'
   
   s.summary          = 'Wrappers for requesting api.'
   
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   
   s.module_name      = 'APIWrapper'
   
-  s.source_files     = 'Sources/*/*'
+  s.source_files     = 'Sources/*/**/*'
 
   s.dependency 'Alamofire'
   
