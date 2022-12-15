@@ -25,20 +25,19 @@ import Foundation
 /// // In subclass: View jobs for a all situation
 /// override func listAPI() -> AnyAPI? { ListAPI.$allJobs }
 /// ```
-public final class AnyAPI: API<Any> {
-    public init<P>(_ api: API<P>) {
-        super.init(
-            wrappedValue: {
-                guard let builder = api.wrappedValue else { return nil }
-                return { builder($0 as! P) }
-            }(),
-            api.path,
-            specialBaseURL: api.specialBaseURL,
-            method: api.method,
-            header: {
-                guard let builder = api.headerBuilder else { return nil }
-                return { builder($0 as! P) }
-            }(),
-            parameterEncoding: api.parameterEncoding)
-    }
-}
+//public final class AnyAPI: API<Any> {
+//    public init<P, M>(_ api: API<P, M>) {
+//        super.init(
+//            wrappedValue: {
+//                guard let builder = api.wrappedValue else { return nil }
+//                return { builder($0 as! P) }
+//            }(),
+//            api.path,
+//            specialBaseURL: api.specialBaseURL,
+//            header: {
+//                guard let builder = api.headerBuilder else { return nil }
+//                return { builder($0 as! P) }
+//            }(),
+//            parameterEncoding: api.parameterEncoding)
+//    }
+//}

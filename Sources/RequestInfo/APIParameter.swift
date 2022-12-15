@@ -15,7 +15,7 @@ public protocol APIParameter {
 
 // MARK: - Default
 
-extension APIParameter where Self: APIParameters {
+extension APIParameter where Self: APIHashableParameter {
     public var toParameters: AnyAPIHashableParameter { .init(self) }
 }
 
@@ -25,7 +25,7 @@ extension Array: APIParameter {
     public var toParameters: AnyAPIHashableParameter {
         let result: [AnyAPIHashableParameter] = (self as [Any?])
             .compactMap {
-                if let value = $0 as? (any APIParameters) { return .init(value) }
+                if let value = $0 as? (any APIHashableParameter) { return .init(value) }
                 if let value = $0 as? APIParameter { return value.toParameters }
                 return mapAnyObjectToEncodable($0 as? AnyObject)
             }
@@ -40,7 +40,7 @@ extension Dictionary: APIParameter where Key == String {
     public var toParameters: AnyAPIHashableParameter {
         let result: [String: AnyAPIHashableParameter] = (self as [String: Any?])
             .compactMapValues {
-                if let value = $0 as? (any APIParameters) { return .init(value) }
+                if let value = $0 as? (any APIHashableParameter) { return .init(value) }
                 if let value = $0 as? APIParameter { return value.toParameters }
                 return mapAnyObjectToEncodable($0 as? AnyObject)
             }

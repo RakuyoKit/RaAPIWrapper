@@ -19,7 +19,7 @@ public struct APIRequestInfo: APIRequestInfoProtocol {
     public let specialBaseURL: URL?
     
     /// Type representing HTTP methods
-    public let method: APIHTTPMethod
+    public let httpMethod: APIHTTPMethod
     
     /// API header
     public let header: APIHeaders?
@@ -33,14 +33,14 @@ public struct APIRequestInfo: APIRequestInfoProtocol {
     public init(
         path: String,
         specialBaseURL: URL?,
-        method: APIHTTPMethod,
+        httpMethod: APIHTTPMethod,
         header: APIHeaders?,
         parameters: AnyAPIHashableParameter?,
         parameterEncoding: AnyAPIHashableParameterEncoding?
     ) {
         self.path = path
         self.specialBaseURL = specialBaseURL
-        self.method = method
+        self.httpMethod = httpMethod
         self.header = header
         self.parameters = parameters
         self.parameterEncoding = parameterEncoding

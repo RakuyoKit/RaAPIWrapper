@@ -8,17 +8,11 @@
 
 import Foundation
 
-fileprivate var _method: APIHTTPMethod = .post
+import Foundation
+
+public enum PostHTTPMethod: APIHTTPMethodWrapper {
+    public static var httpMethod: APIHTTPMethod { "GET" }
+}
 
 /// Encapsulates the data needed to request the `POST` api.
-@propertyWrapper
-public final class POST<Parameter>: API<Parameter> {
-    public override var projectedValue: POST<Parameter> { self }
-    
-    public override class var defaultMethod: APIHTTPMethod? { _method }
-    
-    public override var wrappedValue: ParameterBuilder? {
-        get { super.wrappedValue }
-        set { super.wrappedValue = newValue }
-    }
-}
+public typealias POST<Parameter> = API<Parameter, PostHTTPMethod>

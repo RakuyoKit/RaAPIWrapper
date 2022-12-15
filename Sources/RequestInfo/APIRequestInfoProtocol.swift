@@ -9,6 +9,9 @@
 import Foundation
 
 public protocol APIRequestInfoProtocol: BaseAPIInfoProtocol, Hashable {
+    /// Type representing HTTP methods.
+    var httpMethod: APIHTTPMethod { get }
+    
     /// API header
     var header: APIHeaders? { get }
     

@@ -11,6 +11,8 @@ import Foundation
 public protocol APIProtocol: BaseAPIInfoProtocol {
     associatedtype Parameter
     
+    associatedtype HTTPMethod: APIHTTPMethodWrapper
+    
     /// Parameter constructor for the api.
     var wrappedValue: APIParameterBuilder<Parameter>? { get }
     

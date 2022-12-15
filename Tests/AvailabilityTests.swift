@@ -11,9 +11,9 @@ import XCTest
 
 final class AvailabilityTests: XCTestCase {
     func testExample() throws {
-//        print(TestAPI.$tupleParamAPI.createRequestInfo((id: 1, name: "String")))
+        print(TestAPI.$tupleParamAPI.createRequestInfo((id: 1, name: "String")))
         
-        TestAPI.$tupleParamAPI.request(params: (id: 1, name: nil))
+//        TestAPI.$tupleParamAPI.request(params: (id: 1, name: nil))
     }
 }
 

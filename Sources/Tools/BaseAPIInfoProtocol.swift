@@ -20,9 +20,6 @@ public protocol BaseAPIInfoProtocol {
     /// Should be a setting item independent of your global configuration.
     var specialBaseURL: URL? { get }
     
-    /// Type representing HTTP methods.
-    var method: APIHTTPMethod { get }
-    
     /// Encoding of `Parameters`.
     var parameterEncoding: AnyAPIHashableParameterEncoding? { get }
 }

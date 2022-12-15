@@ -8,17 +8,9 @@
 
 import Foundation
 
-fileprivate var _method: APIHTTPMethod = .get
+public enum GetHTTPMethod: APIHTTPMethodWrapper {
+    public static var httpMethod: APIHTTPMethod { "GET" }
+}
 
 /// Encapsulates the data needed to request the `GET` api.
-@propertyWrapper
-public final class GET<Parameter>: API<Parameter> {
-    public override var projectedValue: GET<Parameter> { self }
-    
-    public override class var defaultMethod: APIHTTPMethod? { _method }
-    
-    public override var wrappedValue: ParameterBuilder? {
-        get { super.wrappedValue }
-        set { super.wrappedValue = newValue }
-    }
-}
+public typealias GET<Parameter> = API<Parameter, GetHTTPMethod>
