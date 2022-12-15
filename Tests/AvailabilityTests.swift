@@ -11,23 +11,28 @@ import XCTest
 
 final class AvailabilityTests: XCTestCase {
     func testExample() throws {
-        print(TestAPI.$tupleParamAPI.createRequestInfo((id: 1, name: "String")))
+        let param: (id: Int, name: String?) = (1, nil)
+        let info = TestAPI.$tupleParamAPI.createRequestInfo(param)
         
-//        TestAPI.$tupleParamAPI.request(params: (id: 1, name: nil))
+        XCTAssertEqual(info.parameters, packToParameters(["id": 1]))
+        XCTAssertNotEqual(info.parameters, packToParameters(["id": 1, "name": Optional.none]))
+        
+        XCTAssertEqual(info.httpMethod, PostHTTPMethod.httpMethod)
+        XCTAssertEqual(info.path, TestAPI.path)
+        XCTAssertNil(info.specialBaseURL)
+        XCTAssertNil(info.parameterEncoding)
+    }
+    
+    private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIHashableParameter {
+        return .init(value.mapValues { AnyAPIHashableParameter($0) })
     }
 }
 
-struct TestAPI {
-    @POST("/api/v1/tuple_param")
+fileprivate struct TestAPI {
+    static let path = "/api/v1/tuple_param"
+    
+    @POST(Self.path)
     static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
-        ["id": $0.id, "name": $0.name]
-    }
-}
-
-extension API {
-    func request(params: Parameter) {
-        let info = createRequestInfo(params)
-        
-        print(info.parameters?.value)
+        ["id": $0.id, "name": $0.name] as [String: Any?]
     }
 }
