@@ -65,11 +65,11 @@ public extension API {
     ///
     func createRequestInfo(_ parameter: Parameter) -> APIRequestInfo {
         return .init(
-            path: self.path,
-            specialBaseURL: self.specialBaseURL,
+            path: path,
+            specialBaseURL: specialBaseURL,
             httpMethod: Self.httpMethod.httpMethod,
-            header: self.headerBuilder?(parameter),
-            parameters: self.wrappedValue?(parameter).toParameters,
+            header: headerBuilder?(parameter),
+            parameters: wrappedValue?(parameter).toParameters,
             parameterEncoding: parameterEncoding,
             userInfo: userInfo
         )

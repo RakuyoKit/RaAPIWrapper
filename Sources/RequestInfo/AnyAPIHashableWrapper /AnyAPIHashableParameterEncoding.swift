@@ -16,13 +16,10 @@ public struct AnyAPIHashableParameterEncoding: AnyAPIHashable {
     
     public typealias Input = Value & Hashable
     
-    ///
     public let value: Value
     
-    ///
     public let equals: (Value) -> Bool
     
-    ///
     public let hash: (_ hasher: inout Hasher) -> Void
     
     public init<T: Input>(_ value: T) {
