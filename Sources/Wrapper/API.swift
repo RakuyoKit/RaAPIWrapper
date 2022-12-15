@@ -38,18 +38,23 @@ public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     /// Encoding of `Parameters`
     public let parameterEncoding: AnyAPIHashableParameterEncoding?
     
+    ///
+    public let userInfo: APIRequestUserInfo
+    
     public init(
         wrappedValue: ParameterBuilder? = nil,
         _ path: String,
         specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
-        parameterEncoding: AnyAPIHashableParameterEncoding? = nil
+        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
+        userInfo: APIRequestUserInfo = [:]
     ) {
         self.wrappedValue = wrappedValue
         self.path = path
         self.specialBaseURL = specialBaseURL
         self.headerBuilder = header
         self.parameterEncoding = parameterEncoding
+        self.userInfo = userInfo
     }
 }
 
@@ -65,7 +70,8 @@ public extension API {
             httpMethod: Self.httpMethod.httpMethod,
             header: self.headerBuilder?(parameter),
             parameters: self.wrappedValue?(parameter).toParameters,
-            parameterEncoding: self.parameterEncoding
+            parameterEncoding: parameterEncoding,
+            userInfo: userInfo
         )
     }
 }
