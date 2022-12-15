@@ -51,3 +51,7 @@ public struct APIRequestInfo {
         self.userInfo = userInfo
     }
 }
+
+// MARK: - Hashable
+
+extension APIRequestInfo: Hashable { }
