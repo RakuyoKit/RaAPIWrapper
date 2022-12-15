@@ -10,7 +10,7 @@ import Foundation
 
 import Alamofire
 
-/// Make `AlamofireParameterEncoding` follow `Hashable` protocol
+/// Make `AlamofireParameterEncoding` follow `Hashable` protocol.
 public struct AnyAPIHashableParameterEncoding: AnyAPIHashable {
     public typealias Value = ParameterEncoding
     

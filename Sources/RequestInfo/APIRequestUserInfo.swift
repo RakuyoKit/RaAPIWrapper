@@ -8,5 +8,5 @@
 
 import Foundation
 
-///
+/// Defines the type of custom data you can pass into the `API` property wrapper.
 public typealias APIRequestUserInfo = [AnyHashable: AnyHashable]

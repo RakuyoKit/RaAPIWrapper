@@ -8,5 +8,5 @@
 
 import Foundation
 
-/// API header.
+/// Defines the type of header you can pass into the `API` property wrapper.
 public typealias APIHeaders = [String: String]

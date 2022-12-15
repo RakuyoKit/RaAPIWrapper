@@ -11,7 +11,7 @@ import Foundation
 /// API parameters.
 public typealias APIHashableParameter = AnyAPIHashableParameter.Input
 
-/// Make `Encodable` follow `Hashable` protocol
+/// Make `Encodable` follow `Hashable` protocol.
 public struct AnyAPIHashableParameter: AnyAPIHashable {
     public typealias Value = Encodable
     

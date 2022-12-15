@@ -8,11 +8,10 @@
 
 import Foundation
 
-public protocol APIHTTPMethodWrapper {
-    static var httpMethod: APIHTTPMethod { get }
-}
-
-/// Type representing HTTP methods.
+/// The HTTP method to use when requesting the api.
+///
+/// With the `ExpressibleByStringLiteral` protocol,
+/// you can initialize the object directly with string literals
 public struct APIHTTPMethod: RawRepresentable {
     public typealias RawValue = String
     
