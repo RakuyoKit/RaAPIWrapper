@@ -42,7 +42,7 @@ public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     public let userInfo: APIRequestUserInfo
     
     public init(
-        wrappedValue: ParameterBuilder? = nil,
+        wrappedValue: ParameterBuilder?,
         _ path: String,
         specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
