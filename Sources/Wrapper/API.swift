@@ -11,85 +11,78 @@ import Foundation
 /// Parameter constructor for the api. Supports passing one parameter.
 public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameter
 
+/// Used to encapsulate the `APIHTTPMethod` object provided to the `API`.
+public protocol APIHTTPMethodWrapper {
+    static var httpMethod: APIHTTPMethod { get }
+}
+
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API<Parameter>: APIInfoProtocol {
+public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     public typealias HeaderBuilder = (Parameter) -> APIHeaders
     
     public typealias ParameterBuilder = APIParameterBuilder<Parameter>
     
+    /// Enables you to access `@propertyWrapper` objects via the `$` symbol.
+    public var projectedValue: API<Parameter, HTTPMethod> { self }
+    
     /// Parameter constructor for the api.
-    open var wrappedValue: ParameterBuilder?
+    public var wrappedValue: ParameterBuilder?
     
     /// A special api base url.
     ///
     /// Should be a setting item independent of your global configuration.
     public let specialBaseURL: URL?
     
-    /// The path to the requested api
+    /// The path to the requested api.
     public let path: String
     
-    /// Type representing HTTP methods
-    public let method: APIHTTPMethod
-    
-    /// Used to construct the api request header
+    /// Used to construct the api request header.
     public let headerBuilder: HeaderBuilder?
     
-    /// Encoding of `Parameters`
-    public let parameterEncoding: APIParameterEncoding?
+    /// Encoding of `Parameters`.
+    public let parameterEncoding: AnyAPIHashableParameterEncoding?
+    
+    /// An additional storage space.
+    /// You can use this property to store some custom data.
+    public let userInfo: APIRequestUserInfo
     
     public init(
-        wrappedValue: ParameterBuilder? = nil,
+        wrappedValue: ParameterBuilder?,
         _ path: String,
         specialBaseURL: URL? = nil,
-        method: APIHTTPMethod? = nil,
         header: HeaderBuilder? = nil,
-        parameterEncoding: APIParameterEncoding? = nil
+        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
+        userInfo: APIRequestUserInfo = [:]
     ) {
         self.wrappedValue = wrappedValue
         self.path = path
         self.specialBaseURL = specialBaseURL
         self.headerBuilder = header
         self.parameterEncoding = parameterEncoding
-        
-        let _method = Self.defaultMethod ?? method
-        assert(_method != nil,
-               "No request method specified! Please set the request method via the `defaultMethod` property or the `init.method` parameter.")
-        
-        self.method = _method!
-    }
-    
-    /// Default request method.
-    ///
-    /// API wrapped with this type will uniformly use this method for requests.
-    ///
-    /// You can configure the request method uniformly with this property in the `API` subclass.
-    open class var defaultMethod: APIHTTPMethod? { nil }
-    
-    ///
-    open var projectedValue: API<Parameter> { self }
-    
-    ///
-    open func createRequestInfo(_ parameter: Parameter) -> APIRequestInfo {
-        return .init(
-            path: self.path,
-            specialBaseURL: self.specialBaseURL,
-            method: self.method,
-            header: self.headerBuilder?(parameter),
-            parameters: self.wrappedValue?(parameter).toParameters,
-            parameterEncoding: self.parameterEncoding
-        )
+        self.userInfo = userInfo
     }
 }
 
-// MARK: - Hashable
-
-extension API: Hashable {
-    public static func == (lhs: API<Parameter>, rhs: API<Parameter>) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
+public extension API {
+    /// The HTTP method to use when requesting the api.
+    ///
+    /// Open this property so that you can access the request method
+    /// directly through the `@propertyWrapper` object.
+    static var httpMethod: HTTPMethod.Type { HTTPMethod.self }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
+    /// Creates an `APIRequestInfo` object.
+    ///
+    /// Used to generate the final, minimal api data.
+    func createRequestInfo(_ parameter: Parameter) -> APIRequestInfo {
+        return .init(
+            path: path,
+            specialBaseURL: specialBaseURL,
+            httpMethod: Self.httpMethod.httpMethod,
+            header: headerBuilder?(parameter),
+            parameters: wrappedValue?(parameter).toParameters,
+            parameterEncoding: parameterEncoding,
+            userInfo: userInfo
+        )
     }
 }

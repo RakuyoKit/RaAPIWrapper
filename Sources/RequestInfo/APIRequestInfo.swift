@@ -9,7 +9,7 @@
 import Foundation
 
 /// Information needed to request the api
-open class APIRequestInfo: APIInfoProtocol {
+public struct APIRequestInfo {
     /// The path to the requested api
     public let path: String
     
@@ -19,50 +19,39 @@ open class APIRequestInfo: APIInfoProtocol {
     public let specialBaseURL: URL?
     
     /// Type representing HTTP methods
-    public let method: APIHTTPMethod
+    public let httpMethod: APIHTTPMethod
     
     /// API header
     public let header: APIHeaders?
     
     /// Parameters of the requested api
-    public let parameters: APIParameters?
+    public let parameters: AnyAPIHashableParameter?
     
     /// Encoding of `parameters`
-    public let parameterEncoding: APIParameterEncoding?
+    public let parameterEncoding: AnyAPIHashableParameterEncoding?
+    
+    ///
+    public let userInfo: APIRequestUserInfo
     
     public init(
         path: String,
-        specialBaseURL: URL?,
-        method: APIHTTPMethod,
-        header: APIHeaders?,
-        parameters: APIParameters?,
-        parameterEncoding: APIParameterEncoding?
+        specialBaseURL: URL? = nil,
+        httpMethod: APIHTTPMethod,
+        header: APIHeaders? = nil,
+        parameters: AnyAPIHashableParameter? = nil,
+        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
+        userInfo: APIRequestUserInfo = [:]
     ) {
         self.path = path
         self.specialBaseURL = specialBaseURL
-        self.method = method
+        self.httpMethod = httpMethod
         self.header = header
         self.parameters = parameters
         self.parameterEncoding = parameterEncoding
+        self.userInfo = userInfo
     }
 }
 
 // MARK: - Hashable
 
-extension APIRequestInfo: Hashable {
-    public static func == (lhs: APIRequestInfo, rhs: APIRequestInfo) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
-    }
-}
-
-// MARK: - CustomStringConvertible
-
-extension APIRequestInfo: CustomStringConvertible {
-    public var description: String {
-        "specialBaseURL: \(specialBaseURL?.absoluteString ?? "nil"); path: \(path); method: \(method.rawValue); header: \(header?.description ?? "nil"); parameters: \(String(describing: parameters)); parameterEncoding: \(String(describing: parameterEncoding))"
-    }
-}
+extension APIRequestInfo: Hashable { }
