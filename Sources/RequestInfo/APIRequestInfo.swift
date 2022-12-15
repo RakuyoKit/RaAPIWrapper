@@ -32,11 +32,11 @@ public struct APIRequestInfo {
     
     public init(
         path: String,
-        specialBaseURL: URL?,
+        specialBaseURL: URL? = nil,
         httpMethod: APIHTTPMethod,
-        header: APIHeaders?,
-        parameters: AnyAPIHashableParameter?,
-        parameterEncoding: AnyAPIHashableParameterEncoding?
+        header: APIHeaders? = nil,
+        parameters: AnyAPIHashableParameter? = nil,
+        parameterEncoding: AnyAPIHashableParameterEncoding? = nil
     ) {
         self.path = path
         self.specialBaseURL = specialBaseURL
