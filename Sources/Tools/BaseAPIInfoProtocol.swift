@@ -10,20 +10,8 @@ import Foundation
 
 import Alamofire
 
-/// Type representing HTTP methods.
-public typealias APIHTTPMethod = Alamofire.HTTPMethod
-
-/// API header.
-public typealias APIHeaders = [String: String]
-
-/// API parameters.
-public typealias APIParameters = Encodable
-
-/// Encoding of `Parameters`.
-public typealias APIParameterEncoding = Alamofire.ParameterEncoding
-
 /// Describe the data needed for an api.
-public protocol APIInfoProtocol: Hashable {
+public protocol BaseAPIInfoProtocol {
     /// The path to the requested api.
     var path: String { get }
     
@@ -36,5 +24,5 @@ public protocol APIInfoProtocol: Hashable {
     var method: APIHTTPMethod { get }
     
     /// Encoding of `Parameters`.
-    var parameterEncoding: APIParameterEncoding? { get }
+    var parameterEncoding: AnyAPIHashableParameterEncoding? { get }
 }

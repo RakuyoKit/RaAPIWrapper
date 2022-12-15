@@ -9,7 +9,7 @@
 import Foundation
 
 /// Information needed to request the api
-open class APIRequestInfo: APIInfoProtocol {
+public struct APIRequestInfo: APIRequestInfoProtocol {
     /// The path to the requested api
     public let path: String
     
@@ -25,18 +25,18 @@ open class APIRequestInfo: APIInfoProtocol {
     public let header: APIHeaders?
     
     /// Parameters of the requested api
-    public let parameters: APIParameters?
+    public let parameters: AnyAPIHashableParameter?
     
     /// Encoding of `parameters`
-    public let parameterEncoding: APIParameterEncoding?
+    public let parameterEncoding: AnyAPIHashableParameterEncoding?
     
     public init(
         path: String,
         specialBaseURL: URL?,
         method: APIHTTPMethod,
         header: APIHeaders?,
-        parameters: APIParameters?,
-        parameterEncoding: APIParameterEncoding?
+        parameters: AnyAPIHashableParameter?,
+        parameterEncoding: AnyAPIHashableParameterEncoding?
     ) {
         self.path = path
         self.specialBaseURL = specialBaseURL
@@ -44,25 +44,5 @@ open class APIRequestInfo: APIInfoProtocol {
         self.header = header
         self.parameters = parameters
         self.parameterEncoding = parameterEncoding
-    }
-}
-
-// MARK: - Hashable
-
-extension APIRequestInfo: Hashable {
-    public static func == (lhs: APIRequestInfo, rhs: APIRequestInfo) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
-    }
-}
-
-// MARK: - CustomStringConvertible
-
-extension APIRequestInfo: CustomStringConvertible {
-    public var description: String {
-        "specialBaseURL: \(specialBaseURL?.absoluteString ?? "nil"); path: \(path); method: \(method.rawValue); header: \(header?.description ?? "nil"); parameters: \(String(describing: parameters)); parameterEncoding: \(String(describing: parameterEncoding))"
     }
 }

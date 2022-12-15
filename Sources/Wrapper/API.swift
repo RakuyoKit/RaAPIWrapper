@@ -13,7 +13,7 @@ public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameter
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-open class API<Parameter>: APIInfoProtocol {
+open class API<Parameter>: APIProtocol {
     public typealias HeaderBuilder = (Parameter) -> APIHeaders
     
     public typealias ParameterBuilder = APIParameterBuilder<Parameter>
@@ -36,7 +36,7 @@ open class API<Parameter>: APIInfoProtocol {
     public let headerBuilder: HeaderBuilder?
     
     /// Encoding of `Parameters`
-    public let parameterEncoding: APIParameterEncoding?
+    public let parameterEncoding: AnyAPIHashableParameterEncoding?
     
     public init(
         wrappedValue: ParameterBuilder? = nil,
@@ -44,7 +44,7 @@ open class API<Parameter>: APIInfoProtocol {
         specialBaseURL: URL? = nil,
         method: APIHTTPMethod? = nil,
         header: HeaderBuilder? = nil,
-        parameterEncoding: APIParameterEncoding? = nil
+        parameterEncoding: AnyAPIHashableParameterEncoding? = nil
     ) {
         self.wrappedValue = wrappedValue
         self.path = path

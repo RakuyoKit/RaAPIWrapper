@@ -28,6 +28,6 @@ extension API {
     func request(params: Parameter) {
         let info = createRequestInfo(params)
         
-        print(info.parameters)
+        print(info.parameters?.value)
     }
 }
