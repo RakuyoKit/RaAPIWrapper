@@ -13,7 +13,7 @@ public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameter
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper>: APIProtocol {
+public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     public typealias HeaderBuilder = (Parameter) -> APIHeaders
     
     public typealias ParameterBuilder = APIParameterBuilder<Parameter>

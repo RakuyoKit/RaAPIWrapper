@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 public enum PostHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "GET" }
 }

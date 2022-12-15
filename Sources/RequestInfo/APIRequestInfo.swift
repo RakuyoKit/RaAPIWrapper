@@ -9,7 +9,7 @@
 import Foundation
 
 /// Information needed to request the api
-public struct APIRequestInfo: APIRequestInfoProtocol {
+public struct APIRequestInfo {
     /// The path to the requested api
     public let path: String
     
