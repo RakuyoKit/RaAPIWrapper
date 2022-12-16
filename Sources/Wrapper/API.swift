@@ -18,7 +18,7 @@ public protocol APIHTTPMethodWrapper {
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
+public class API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     public typealias HeaderBuilder = (Parameter) -> APIHeaders
     
     public typealias ParameterBuilder = APIParameterBuilder<Parameter>

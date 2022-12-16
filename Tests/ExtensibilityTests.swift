@@ -28,7 +28,7 @@ enum MockType: Hashable {
 }
 
 extension API {
-    init(
+    convenience init(
         wrappedValue: ParameterBuilder? = nil,
         _ path: String,
         mockType: MockType
