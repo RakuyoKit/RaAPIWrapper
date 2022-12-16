@@ -18,7 +18,7 @@ final class ExtensibilityTests: XCTestCase {
     }
 }
 
-fileprivate struct TestAPI {
+fileprivate enum TestAPI {
     @GET("/api/v1/tuple_param", mockType: .someType)
     static var testAPI: APIParameterBuilder<()>? = nil
 }
