@@ -9,7 +9,7 @@
 import Foundation
 
 /// Parameter constructor for the api. Supports passing one parameter.
-public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameter
+public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameterConvertible
 
 /// Used to encapsulate the `APIHTTPMethod` object provided to the `API`.
 public protocol APIHTTPMethodWrapper {
@@ -41,7 +41,7 @@ public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     public let headerBuilder: HeaderBuilder?
     
     /// Encoding of `Parameters`.
-    public let parameterEncoding: AnyAPIHashableParameterEncoding?
+    public let parameterEncoding: AnyAPIParameterEncoding?
     
     /// An additional storage space.
     /// You can use this property to store some custom data.
@@ -52,7 +52,7 @@ public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
         _ path: String,
         specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
-        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
+        parameterEncoding: AnyAPIParameterEncoding? = nil,
         userInfo: APIRequestUserInfo = [:]
     ) {
         self.wrappedValue = wrappedValue

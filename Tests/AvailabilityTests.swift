@@ -23,8 +23,8 @@ final class AvailabilityTests: XCTestCase {
         XCTAssertNil(info.parameterEncoding)
     }
     
-    private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIHashableParameter {
-        return .init(value.mapValues { AnyAPIHashableParameter($0) })
+    private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIParameter {
+        return .init(value.mapValues { AnyAPIParameter($0) })
     }
 }
 

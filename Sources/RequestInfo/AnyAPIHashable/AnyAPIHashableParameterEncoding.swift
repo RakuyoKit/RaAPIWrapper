@@ -10,6 +10,9 @@ import Foundation
 
 import Alamofire
 
+/// Represents an arbitrary api parameter.
+public typealias AnyAPIParameterEncoding = AnyAPIHashableParameterEncoding
+
 /// Make `AlamofireParameterEncoding` follow `Hashable` protocol.
 public struct AnyAPIHashableParameterEncoding: AnyAPIHashable {
     public typealias Value = ParameterEncoding
@@ -31,7 +34,7 @@ public struct AnyAPIHashableParameterEncoding: AnyAPIHashable {
 
 // MARK: - AlamofireParameterEncoding
 
-extension AnyAPIHashableParameterEncoding: ParameterEncoding {
+extension AnyAPIParameterEncoding: ParameterEncoding {
     public func encode(
         _ urlRequest: Alamofire.URLRequestConvertible,
         with parameters: Alamofire.Parameters?

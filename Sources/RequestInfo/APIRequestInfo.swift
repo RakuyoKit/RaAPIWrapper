@@ -25,10 +25,10 @@ public struct APIRequestInfo {
     public let header: APIHeaders?
     
     /// Parameters of the requested api
-    public let parameters: AnyAPIHashableParameter?
+    public let parameters: AnyAPIParameter?
     
     /// Encoding of `parameters`
-    public let parameterEncoding: AnyAPIHashableParameterEncoding?
+    public let parameterEncoding: AnyAPIParameterEncoding?
     
     ///
     public let userInfo: APIRequestUserInfo
@@ -38,8 +38,8 @@ public struct APIRequestInfo {
         specialBaseURL: URL? = nil,
         httpMethod: APIHTTPMethod,
         header: APIHeaders? = nil,
-        parameters: AnyAPIHashableParameter? = nil,
-        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
+        parameters: AnyAPIParameter? = nil,
+        parameterEncoding: AnyAPIParameterEncoding? = nil,
         userInfo: APIRequestUserInfo = [:]
     ) {
         self.path = path

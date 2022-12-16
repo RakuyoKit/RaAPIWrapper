@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// API parameters.
-public typealias APIHashableParameter = AnyAPIHashableParameter.Input
+/// Represents an arbitrary api parameter.
+public typealias AnyAPIParameter = AnyAPIHashableParameter
 
 /// Make `Encodable` follow `Hashable` protocol.
 public struct AnyAPIHashableParameter: AnyAPIHashable {
