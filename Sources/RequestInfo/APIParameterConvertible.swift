@@ -37,9 +37,6 @@ extension Int: APIParameterConvertible { }
 extension Float: APIParameterConvertible { }
 extension Double: APIParameterConvertible { }
 
-@available(iOS 14.0, *)
-extension Float16: APIParameterConvertible { }
-
 // MARK: - Bool
 
 extension Bool: APIParameterConvertible { }
