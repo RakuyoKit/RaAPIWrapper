@@ -20,7 +20,6 @@ final class AvailabilityTests: XCTestCase {
         XCTAssertEqual(info.httpMethod, PostHTTPMethod.httpMethod)
         XCTAssertEqual(info.path, TestAPI.path)
         XCTAssertNil(info.specialBaseURL)
-        XCTAssertNil(info.parameterEncoding)
     }
     
     private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIParameter {
