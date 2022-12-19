@@ -14,7 +14,7 @@ When you have a large number of network request apis in the same file `RaAPIWrap
 
 ## Say it before
 
-**Special Note! **: `RaAPIWrapper` is just a syntactic sugar for **defining** web requests. You need to use `Alamofire`, `Moya`, other third-party web framework or call `URLSession` directly to initiate web requests on this basis.
+**Special Note!** : `RaAPIWrapper` is just a syntactic sugar for **defining** web requests. You need to use `Alamofire`, `Moya`, other third-party web framework or call `URLSession` directly to initiate web requests on this basis.
 
 The good thing is that you can easily integrate `RaAPIWrapper` into your existing project with few or no code changes, and `RaAPIWrapper` can coexist very well with the existing web framework in your project.
 
@@ -27,21 +27,21 @@ The good thing is that you can easily integrate `RaAPIWrapper` into your existin
 ## Example
 
 ```swift
-@GET(/api/v1/no_param)
+@GET("/api/v1/no_param")
 static var noParamAPI: APIParameterBuilder<()>? = nil
 
-@POST(/api/v1/tuple_param)
+@POST("/api/v1/tuple_param")
 static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
-	// Eliminate the warning by explicitly converting to `[String: Any?]`.
-	// Also ensure that `nil` parameters can be filtered.
-	["id": $0.id, "name": $0.name] as [String: Any?]
+    // Eliminate the warning by explicitly converting to `[String: Any?]`.
+    // Also ensure that `nil` parameters can be filtered.
+    ["id": $0.id, "name": $0.name] as [String: Any?]
 }
 
 @POST("/post")
 static var postWithModel: APIParameterBuilder<Arg>? = {
-	// You can have your model follow the `APIParameterConvertible` protocol,
+    // You can have your model follow the `APIParameterConvertible` protocol,
     // or use `AnyAPIHashableParameter` to wrap your model in an outer layer.
-	AnyAPIHashableParameter($0)
+    AnyAPIHashableParameter($0)
 }
 ```
 
@@ -66,8 +66,8 @@ Or add the following to your `Package.swift` file:
 ```swift
 dependencies: [
   .package(
-  	url: "https://github.com/rakuyoMo/RaAPIWrapper.git", 
-  	.upToNextMajor(from: "1.0.0")
+    url: "https://github.com/rakuyoMo/RaAPIWrapper.git", 
+    .upToNextMajor(from: "1.0.0")
   )
 ]
 ```
