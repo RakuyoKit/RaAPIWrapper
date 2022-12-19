@@ -38,13 +38,17 @@ extension BasicAPI {
     /// This is an api for requests using the **POST** method.
     ///
     /// The full api address is: [](https://postman-echo.com/post) .
-    /// The api is entered as a **tuple** type and requires two parameters of type `String`, where the second parameter can be `nil`.
+    /// The api is entered as a **tuple** type and requires two parameters, where the second parameter can be `nil`.
     @POST("/post")
-    static var postWithTuple: APIParameterBuilder<(foo1: String, foo2: String?)>? = {
+    static var postWithTuple: APIParameterBuilder<(foo1: String, foo2: Int?)>? = {
         [
             "foo1": $0.foo1,
             "foo2": $0.foo2,
         ]
+        
+        // Eliminate the warning by explicitly converting to `[String: Any?]`.
+        // Also ensure that `nil` parameters can be filtered.
+        as [String: Any?]
     }
     
     /// This is an api for requests using the **POST** method.
@@ -53,6 +57,8 @@ extension BasicAPI {
     /// This api is referenced with the `Arg` type.
     @POST("/post")
     static var postWithModel: APIParameterBuilder<Arg>? = {
+        // You can have your model follow the `APIParameterConvertible` protocol.
+        // or use `AnyAPIHashableParameter` to wrap your model in an outer layer.
         AnyAPIHashableParameter($0)
     }
 }
