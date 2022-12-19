@@ -8,6 +8,8 @@ import APIWrapper
  The `RaAPIWrapper` is extremely extensible.
  You can work with the `userInfo` property to customize the api parameters you need.
  
+ The `RaAPIWrapper/AF` module then takes advantage of this feature and supports the `ParameterEncoding` field of `Alamofire`.
+ 
  The following code demonstrates how to add a custom parameter to `API`:
  */
 

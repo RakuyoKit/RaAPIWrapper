@@ -40,9 +40,6 @@ public class API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     /// Used to construct the api request header.
     public let headerBuilder: HeaderBuilder?
     
-    /// Encoding of `Parameters`.
-    public let parameterEncoding: AnyAPIParameterEncoding?
-    
     /// An additional storage space.
     /// You can use this property to store some custom data.
     public let userInfo: APIRequestUserInfo
@@ -52,14 +49,12 @@ public class API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
         _ path: String,
         specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
-        parameterEncoding: AnyAPIParameterEncoding? = nil,
         userInfo: APIRequestUserInfo = [:]
     ) {
         self.wrappedValue = wrappedValue
         self.path = path
         self.specialBaseURL = specialBaseURL
         self.headerBuilder = header
-        self.parameterEncoding = parameterEncoding
         self.userInfo = userInfo
     }
 }
@@ -81,7 +76,6 @@ public extension API {
             httpMethod: Self.httpMethod.httpMethod,
             header: headerBuilder?(parameter),
             parameters: wrappedValue?(parameter).toParameters,
-            parameterEncoding: parameterEncoding,
             userInfo: userInfo
         )
     }

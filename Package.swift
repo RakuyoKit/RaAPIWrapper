@@ -5,14 +5,15 @@ import PackageDescription
 
 let package = Package(
     name: "APIWrapper",
-    platforms: [.macOS(.v10_13),
-                .iOS(.v11),
-                .tvOS(.v11),
-                .watchOS(.v4)],
+    platforms: [
+        .macOS(.v10_13),
+        .iOS(.v11),
+        .tvOS(.v11),
+        .watchOS(.v4)
+    ],
     products: [
-        .library(
-            name: "APIWrapper",
-            targets: ["APIWrapper"]),
+        .library(name: "APIWrapper", targets: ["APIWrapper"]),
+        .library(name: "AFAPIWrapper", targets: ["AFAPIWrapper"]),
     ],
     dependencies: [
         .package(
@@ -24,11 +25,21 @@ let package = Package(
         .target(
             name: "APIWrapper",
             dependencies: ["Alamofire"],
-            path: "Sources"),
+            path: "Sources/Core"
+        ),
+        .target(
+            name: "AFAPIWrapper",
+            dependencies: [
+                "APIWrapper",
+                .product(name: "Alamofire", package: "Alamofire")
+            ],
+            path: "Sources/Alamofire"
+        ),
         .testTarget(
             name: "APIWrapperTests",
             dependencies: ["APIWrapper"],
-            path: "Tests"),
+            path: "Tests"
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )

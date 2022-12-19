@@ -10,6 +10,10 @@ import Foundation
 
 import Alamofire
 
+#if !COCOAPODS
+import APIWrapper
+#endif
+
 /// Represents an arbitrary api parameter.
 public typealias AnyAPIParameterEncoding = AnyAPIHashableParameterEncoding
 

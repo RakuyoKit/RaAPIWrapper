@@ -30,8 +30,17 @@ Pod::Spec.new do |s|
   
   s.module_name = 'APIWrapper'
   
-  s.source_files = 'Sources/*/**/*'
-
-  s.dependency 'Alamofire'
+  s.default_subspec = "Core"
+  
+  s.subspec "Core" do |cs|
+    cs.source_files = 'Sources/Core/**/*'
+  end
+  
+  s.subspec "AF" do |cs|
+    cs.source_files = 'Sources/Alamofire/*'
+    
+    cs.dependency "RaAPIWrapper/Core"
+    cs.dependency "Alamofire", "~> 5.0"
+  end
   
 end
