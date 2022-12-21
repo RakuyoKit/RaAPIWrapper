@@ -9,7 +9,7 @@
 import Foundation
 
 public enum PostHTTPMethod: APIHTTPMethodWrapper {
-    public static var httpMethod: APIHTTPMethod { "GET" }
+    public static var httpMethod: APIHTTPMethod { "POST" }
 }
 
 /// Encapsulates the data needed to request the `POST` api.

@@ -27,13 +27,7 @@ release(){
     
     git checkout -b $release_branch develop
     
-    agvtool new-marketing-version $version
-    
-    agvtool next-version -all
-    
-    build=$(agvtool what-version | tail -n2 | awk -F ' ' '{print $NF}')
-    
-    git_message="[Release] version: $version build: $build"
+    git_message="[Release] version: $version"
     
     git add . && git commit -m $git_message
     

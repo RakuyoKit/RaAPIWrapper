@@ -9,7 +9,7 @@
 import Foundation
 
 /// Parameter constructor for the api. Supports passing one parameter.
-public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameter
+public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameterConvertible
 
 /// Used to encapsulate the `APIHTTPMethod` object provided to the `API`.
 public protocol APIHTTPMethodWrapper {
@@ -18,7 +18,7 @@ public protocol APIHTTPMethodWrapper {
 
 /// API wrapper. Used to wrap the data needed to request an api.
 @propertyWrapper
-public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
+public class API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     public typealias HeaderBuilder = (Parameter) -> APIHeaders
     
     public typealias ParameterBuilder = APIParameterBuilder<Parameter>
@@ -40,9 +40,6 @@ public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
     /// Used to construct the api request header.
     public let headerBuilder: HeaderBuilder?
     
-    /// Encoding of `Parameters`.
-    public let parameterEncoding: AnyAPIHashableParameterEncoding?
-    
     /// An additional storage space.
     /// You can use this property to store some custom data.
     public let userInfo: APIRequestUserInfo
@@ -52,14 +49,12 @@ public struct API<Parameter, HTTPMethod: APIHTTPMethodWrapper> {
         _ path: String,
         specialBaseURL: URL? = nil,
         header: HeaderBuilder? = nil,
-        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
         userInfo: APIRequestUserInfo = [:]
     ) {
         self.wrappedValue = wrappedValue
         self.path = path
         self.specialBaseURL = specialBaseURL
         self.headerBuilder = header
-        self.parameterEncoding = parameterEncoding
         self.userInfo = userInfo
     }
 }
@@ -81,7 +76,6 @@ public extension API {
             httpMethod: Self.httpMethod.httpMethod,
             header: headerBuilder?(parameter),
             parameters: wrappedValue?(parameter).toParameters,
-            parameterEncoding: parameterEncoding,
             userInfo: userInfo
         )
     }

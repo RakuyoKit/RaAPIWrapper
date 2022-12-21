@@ -25,12 +25,10 @@ public struct APIRequestInfo {
     public let header: APIHeaders?
     
     /// Parameters of the requested api
-    public let parameters: AnyAPIHashableParameter?
+    public let parameters: AnyAPIParameter?
     
-    /// Encoding of `parameters`
-    public let parameterEncoding: AnyAPIHashableParameterEncoding?
-    
-    ///
+    /// An additional storage space.
+    /// You can use this property to store some custom data.
     public let userInfo: APIRequestUserInfo
     
     public init(
@@ -38,8 +36,7 @@ public struct APIRequestInfo {
         specialBaseURL: URL? = nil,
         httpMethod: APIHTTPMethod,
         header: APIHeaders? = nil,
-        parameters: AnyAPIHashableParameter? = nil,
-        parameterEncoding: AnyAPIHashableParameterEncoding? = nil,
+        parameters: AnyAPIParameter? = nil,
         userInfo: APIRequestUserInfo = [:]
     ) {
         self.path = path
@@ -47,7 +44,6 @@ public struct APIRequestInfo {
         self.httpMethod = httpMethod
         self.header = header
         self.parameters = parameters
-        self.parameterEncoding = parameterEncoding
         self.userInfo = userInfo
     }
 }

@@ -20,11 +20,10 @@ final class AvailabilityTests: XCTestCase {
         XCTAssertEqual(info.httpMethod, PostHTTPMethod.httpMethod)
         XCTAssertEqual(info.path, TestAPI.path)
         XCTAssertNil(info.specialBaseURL)
-        XCTAssertNil(info.parameterEncoding)
     }
     
-    private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIHashableParameter {
-        return .init(value.mapValues { AnyAPIHashableParameter($0) })
+    private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIParameter {
+        return .init(value.mapValues { AnyAPIParameter($0) })
     }
 }
 

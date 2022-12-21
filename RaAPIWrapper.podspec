@@ -3,32 +3,44 @@
 
 Pod::Spec.new do |s|
   
-  s.name             = 'RaAPIWrapper'
+  s.name = 'RaAPIWrapper'
   
-  s.version          = '0.9.0'
+  s.version = '1.0.1'
   
-  s.summary          = 'Wrappers for requesting api.'
+  s.summary = 'Makes it easier to define a network request.'
   
-  s.description      = 'Provide the necessary data for the requesting api in a more aggregated form.'
+  s.description = 'Use `@propertyWrapper to provide the necessary data for network requests in a more aggregated form.'
   
-  s.homepage         = 'https://github.com/rakuyoMo/RaAPIWrapper'
+  s.homepage = 'https://github.com/rakuyoMo/RaAPIWrapper'
   
-  s.license          = 'MIT'
+  s.license = 'MIT'
   
-  s.author           = { 'Rakuyo' => 'rakuyo.mo@gmail.com' }
+  s.author = { 'Rakuyo' => 'rakuyo.mo@gmail.com' }
   
-  s.source           = { :git => 'https://github.com/rakuyoMo/RaAPIWrapper.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/rakuyoMo/RaAPIWrapper.git', :tag => s.version.to_s }
   
-  s.requires_arc     = true
-
-  s.platform         = :ios, '10.0'
+  s.requires_arc = true
   
-  s.swift_version    = '5.0'
+  s.ios.deployment_target = '11.0'
+  s.osx.deployment_target = '10.13'
+  s.tvos.deployment_target = '11.0'
+  s.watchos.deployment_target = '4.0'
   
-  s.module_name      = 'APIWrapper'
+  s.swift_versions = ['5']
   
-  s.source_files     = 'Sources/*/**/*'
-
-  s.dependency 'Alamofire'
+  s.module_name = 'APIWrapper'
+  
+  s.default_subspec = "Core"
+  
+  s.subspec "Core" do |cs|
+    cs.source_files = 'Sources/Core/**/*'
+  end
+  
+  s.subspec "AF" do |cs|
+    cs.source_files = 'Sources/Alamofire/*'
+    
+    cs.dependency "RaAPIWrapper/Core"
+    cs.dependency "Alamofire", "~> 5.0"
+  end
   
 end
