@@ -40,8 +40,8 @@ static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
 @POST("/post")
 static var postWithModel: APIParameterBuilder<Arg>? = {
     // You can have your model follow the `APIParameterConvertible` protocol,
-    // or use `AnyAPIHashableParameter` to wrap your model in an outer layer.
-    AnyAPIHashableParameter($0)
+    // or use `AnyAPIParameter` to wrap your model in an outer layer.
+    AnyAPIParameter($0)
 }
 ```
 

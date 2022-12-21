@@ -36,8 +36,8 @@ static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
 
 @POST("/post")
 static var postWithModel: APIParameterBuilder<Arg>? = {
-    // 您可以让您的模型遵循 `APIParameterConvertible` 协议，或者使用 `AnyAPIHashableParameter` 在外面包裹一层。
-    AnyAPIHashableParameter($0)
+    // 您可以让您的模型遵循 `APIParameterConvertible` 协议，或者使用 `AnyAPIParameter` 在外面包裹一层。
+    AnyAPIParameter($0)
 }
 ```
 
