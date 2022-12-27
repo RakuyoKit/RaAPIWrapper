@@ -41,6 +41,10 @@ extension Double: APIParameterConvertible { }
 
 extension Bool: APIParameterConvertible { }
 
+// MARK: - Data
+
+extension Data: APIParameterConvertible { }
+
 // MARK: - Array
 
 extension Array: APIParameterConvertible {
