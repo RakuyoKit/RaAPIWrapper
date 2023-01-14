@@ -1,3 +1,5 @@
+import PlaygroundSupport
+
 import Foundation
 
 import APIWrapper

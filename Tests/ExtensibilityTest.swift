@@ -1,5 +1,5 @@
 //
-//  ExtensibilityTests.swift
+//  ExtensibilityTest.swift
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/12/15.

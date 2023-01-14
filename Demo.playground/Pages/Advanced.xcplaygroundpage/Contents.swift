@@ -1,5 +1,7 @@
 //: [Previous](@previous)
 
+import PlaygroundSupport
+
 import Foundation
 
 import APIWrapper
