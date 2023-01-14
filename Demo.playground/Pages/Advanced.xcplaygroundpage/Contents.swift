@@ -36,7 +36,6 @@ extension API {
 enum AdvancedAPI {
     /// Finally, the new initialization method declared above is called on
     /// the property wrapper to complete the interface definition.
-    
     @GET("/api", verification: .normal)
     static var testAPI: APIParameterBuilder<()>? = nil
 }
