@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   
   s.name = 'RaAPIWrapper'
   
-  s.version = '1.0.1'
+  s.version = '1.0.2'
   
   s.summary = 'Makes it easier to define a network request.'
   
