@@ -31,17 +31,16 @@ The good thing is that you can easily integrate `RaAPIWrapper` into your existin
 static var noParamAPI: APIParameterBuilder<()>? = nil
 
 @POST("/api/v1/tuple_param")
-static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
-    // Eliminate the warning by explicitly converting to `[String: Any?]`.
-    // Also ensure that `nil` parameters can be filtered.
-    ["id": $0.id, "name": $0.name] as [String: Any?]
+static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = .init {
+    // `Dictionary` and `Array` can be used directly as parameters.
+    ["id": $0.id, "name": $0.name]
 }
 
 @POST("/post")
-static var postWithModel: APIParameterBuilder<Arg>? = {
-    // You can have your model follow the `APIParameterConvertible` protocol,
-    // or use `AnyAPIParameter` to wrap your model in an outer layer.
-    AnyAPIParameter($0)
+static var postWithModel: APIParameterBuilder<Arg>? = .init {
+    // When the parameter `Arg` complies with the `APIParameter` (`Encodable & Hashable`) protocol, 
+    // it can be used directly as a parameter.
+    $0
 }
 ```
 

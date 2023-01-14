@@ -1,5 +1,5 @@
 //
-//  APIParametrizable.swift
+//  APIParameter.swift
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2023/01/13.
@@ -9,4 +9,7 @@
 import Foundation
 
 /// Used to constrain what types can be used as api parameters.
-public typealias APIParametrizable = AnyAPIHashableParameter.Input
+public typealias APIParameter = AnyAPIHashableParameter.Input
+
+/// Represents an arbitrary api parameter.
+public typealias AnyAPIParameter = AnyAPIHashableParameter

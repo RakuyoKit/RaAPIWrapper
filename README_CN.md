@@ -29,15 +29,15 @@
 static var noParamAPI: APIParameterBuilder<()>? = nil
 
 @POST("/api/v1/tuple_param")
-static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
-    // 通过显式转换为 `[String: Any?]` 来消除警告，同时确保为 `nil` 的参数能够被过滤。
-    ["id": $0.id, "name": $0.name] as [String: Any?]
+static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = .init {
+    // 字典和数组可直接作为参数使用
+    ["id": $0.id, "name": $0.name]
 }
 
 @POST("/post")
-static var postWithModel: APIParameterBuilder<Arg>? = {
-    // 您可以让您的模型遵循 `APIParameterConvertible` 协议，或者使用 `AnyAPIParameter` 在外面包裹一层。
-    AnyAPIParameter($0)
+static var postWithModel: APIParameterBuilder<Arg>? = .init {
+    // 当参数 `Arg` 遵守 `APIParameter`（`Encodable & Hashable`） 协议时，可直接作为参数使用。
+    $0
 }
 ```
 
