@@ -31,20 +31,35 @@ public struct APIRequestInfo {
     /// You can use this property to store some custom data.
     public let userInfo: APIRequestUserInfo
     
-    public init(
+    public init<ParamType>(
         path: String,
         specialBaseURL: URL? = nil,
         httpMethod: APIHTTPMethod,
         header: APIHeaders? = nil,
-        parameters: AnyAPIParameter? = nil,
+        parameterBuild: APIParameterBuilder<ParamType>? = nil,
+        parameterInput: ParamType? = nil,
         userInfo: APIRequestUserInfo = [:]
     ) {
         self.path = path
         self.specialBaseURL = specialBaseURL
         self.httpMethod = httpMethod
         self.header = header
-        self.parameters = parameters
         self.userInfo = userInfo
+        
+        self.parameters = {
+            guard
+                let parameter = parameterInput,
+                let build = parameterBuild
+            else {
+                return nil
+            }
+            
+            let result = build(parameter)
+            if let value = result as? AnyAPIParameter {
+                return value
+            }
+            return .init(result)
+        }()
     }
 }
 

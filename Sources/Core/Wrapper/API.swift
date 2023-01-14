@@ -8,9 +8,6 @@
 
 import Foundation
 
-/// Parameter constructor for the api. Supports passing one parameter.
-public typealias APIParameterBuilder<ParamType> = (ParamType) -> APIParameterConvertible
-
 /// Used to encapsulate the `APIHTTPMethod` object provided to the `API`.
 public protocol APIHTTPMethodWrapper {
     static var httpMethod: APIHTTPMethod { get }
@@ -75,7 +72,8 @@ public extension API {
             specialBaseURL: specialBaseURL,
             httpMethod: Self.httpMethod.httpMethod,
             header: headerBuilder?(parameter),
-            parameters: wrappedValue?(parameter).toParameters,
+            parameterBuild: wrappedValue,
+            parameterInput: parameter,
             userInfo: userInfo
         )
     }

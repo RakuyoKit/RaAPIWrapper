@@ -32,17 +32,17 @@ fileprivate struct TestAPI {
     static let path = "/api/v1/tuple_param"
     
     @POST(Self.path)
-    static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
-        ["id": $0.id, "name": $0.name] as [String: Any?]
-    }
-    
-    @POST(Self.path)
-    static var test1API: APIParameterBuilder<(id: Int, name: String)>? = {
+    static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = .init {
         ["id": $0.id, "name": $0.name]
     }
     
     @POST(Self.path)
-    static var test2API: APIParameterBuilder<(id: String, name: String)>? = {
+    static var test1API: APIParameterBuilder<(id: Int, name: String)>? = .init {
+        ["id": $0.id, "name": $0.name]
+    }
+    
+    @POST(Self.path)
+    static var test2API: APIParameterBuilder<(id: String, name: String)>? = .init {
         ["id": $0.id, "name": $0.name]
     }
 }
