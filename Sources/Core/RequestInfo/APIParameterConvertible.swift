@@ -1,5 +1,5 @@
 //
-//  APIParameters.swift
+//  APIParameterConvertible.swift
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/8/25.
@@ -7,9 +7,6 @@
 //
 
 import Foundation
-
-/// Used to constrain what types can be used as api parameters.
-public typealias APIParametrizable = AnyAPIParameter.Input
 
 /// Means that the type can be converted to an interface parameter for requesting an api.
 public protocol APIParameterConvertible {
@@ -40,6 +37,10 @@ extension Double: APIParameterConvertible { }
 // MARK: - Bool
 
 extension Bool: APIParameterConvertible { }
+
+// MARK: - Data
+
+extension Data: APIParameterConvertible { }
 
 // MARK: - Array
 

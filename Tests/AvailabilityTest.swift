@@ -1,5 +1,5 @@
 //
-//  AvailabilityTests.swift
+//  AvailabilityTest.swift
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/8/26.
@@ -14,6 +14,7 @@ final class AvailabilityTests: XCTestCase {
         let param: (id: Int, name: String?) = (1, nil)
         let info = TestAPI.$tupleParamAPI.createRequestInfo(param)
         
+        // Verify that `nil` is filtered out in `info.parameters`
         XCTAssertEqual(info.parameters, packToParameters(["id": 1]))
         XCTAssertNotEqual(info.parameters, packToParameters(["id": 1, "name": Optional.none]))
         
@@ -22,7 +23,7 @@ final class AvailabilityTests: XCTestCase {
         XCTAssertNil(info.specialBaseURL)
     }
     
-    private func packToParameters(_ value: [String: Optional<Int>]) -> AnyAPIParameter {
+    private func packToParameters(_ value: [String: Int?]) -> AnyAPIParameter {
         return .init(value.mapValues { AnyAPIParameter($0) })
     }
 }
@@ -33,5 +34,15 @@ fileprivate struct TestAPI {
     @POST(Self.path)
     static var tupleParamAPI: APIParameterBuilder<(id: Int, name: String?)>? = {
         ["id": $0.id, "name": $0.name] as [String: Any?]
+    }
+    
+    @POST(Self.path)
+    static var test1API: APIParameterBuilder<(id: Int, name: String)>? = {
+        ["id": $0.id, "name": $0.name]
+    }
+    
+    @POST(Self.path)
+    static var test2API: APIParameterBuilder<(id: String, name: String)>? = {
+        ["id": $0.id, "name": $0.name]
     }
 }

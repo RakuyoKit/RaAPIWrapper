@@ -75,7 +75,7 @@ private extension API {
         }
         
         let (data, response) = try await URLSession.shared.data(for: request)
-        print("✅ \(String(describing: response.url?.absoluteString)) End of request")
+        print("✅ \(response.url?.absoluteString ?? "nil") End of request")
         
         return data
     }
