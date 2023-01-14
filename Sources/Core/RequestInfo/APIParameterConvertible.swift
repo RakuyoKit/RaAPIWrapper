@@ -8,9 +8,6 @@
 
 import Foundation
 
-/// Used to constrain what types can be used as api parameters.
-public typealias APIParametrizable = AnyAPIParameter.Input
-
 /// Means that the type can be converted to an interface parameter for requesting an api.
 public protocol APIParameterConvertible {
     /// Converts the target to an Encodable-compliant type.

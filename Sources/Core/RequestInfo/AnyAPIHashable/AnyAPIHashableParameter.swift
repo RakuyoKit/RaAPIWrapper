@@ -8,9 +8,6 @@
 
 import Foundation
 
-/// Represents an arbitrary api parameter.
-public typealias AnyAPIParameter = AnyAPIHashableParameter
-
 /// Make `Encodable` follow `Hashable` protocol.
 public struct AnyAPIHashableParameter: AnyAPIHashable {
     public typealias Value = Encodable
