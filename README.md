@@ -58,7 +58,7 @@ If your project relies on `Alamofire`, then you may also consider relying on `Ra
 
 - File > Swift Packages > Add Package Dependency
 - Add https://github.com/rakuyoMo/RaAPIWrapper.git
-- SSelect "Up to Next Major" and fill in the corresponding version number
+- Select "Up to Next Major" and fill in the corresponding version number
 
 Or add the following to your `Package.swift` file:
 
