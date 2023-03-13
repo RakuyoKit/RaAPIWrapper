@@ -29,7 +29,7 @@ release(){
     
     git_message="[Release] version: $version"
     
-    git add . && git commit -m $git_message
+    git add . && git commit -m "$git_message"
     
     git checkout main
     git merge --no-ff -m 'Merge branch '$release_branch'' $release_branch
