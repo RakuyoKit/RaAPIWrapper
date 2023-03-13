@@ -2,11 +2,11 @@
 
 <p align="center">
 <a><img src="https://img.shields.io/badge/language-swift-ffac45.svg"></a>
-<a href="https://github.com/rakuyoMo/RaAPIWrapper/releases"><img src="https://img.shields.io/cocoapods/v/RaAPIWrapper.svg"></a>
-<a href="https://github.com/rakuyoMo/RaAPIWrapper/blob/main/LICENSE"><img src="https://img.shields.io/cocoapods/l/RaAPIWrapper.svg?style=flat"></a>
+<a href="https://github.com/RakuyoKit/RaAPIWrapper/releases"><img src="https://img.shields.io/cocoapods/v/RaAPIWrapper.svg"></a>
+<a href="https://github.com/RakuyoKit/RaAPIWrapper/blob/main/LICENSE"><img src="https://img.shields.io/cocoapods/l/RaAPIWrapper.svg?style=flat"></a>
 </p>
 
-> [中文](https://github.com/rakuyoMo/RaAPIWrapper/blob/main/README_CN.md)
+> [中文](https://github.com/RakuyoKit/RaAPIWrapper/blob/main/README_CN.md)
 
 `RaAPIWrapper` uses `@propertyWrapper` to achieve a similar effect to that of defining network requests in the Android `Retrofit` library.
 
@@ -57,7 +57,7 @@ If your project relies on `Alamofire`, then you may also consider relying on `Ra
 ### Swift Package Manager
 
 - File > Swift Packages > Add Package Dependency
-- Add https://github.com/rakuyoMo/RaAPIWrapper.git
+- Add https://github.com/RakuyoKit/RaAPIWrapper.git
 - Select "Up to Next Major" and fill in the corresponding version number
 
 Or add the following to your `Package.swift` file:
@@ -65,7 +65,7 @@ Or add the following to your `Package.swift` file:
 ```swift
 dependencies: [
   .package(
-    url: "https://github.com/rakuyoMo/RaAPIWrapper.git", 
+    url: "https://github.com/RakuyoKit/RaAPIWrapper.git", 
     .upToNextMajor(from: "1.1.0")
   )
 ]

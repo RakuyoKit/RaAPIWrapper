@@ -2,8 +2,8 @@
 
 <p align="center">
 <a><img src="https://img.shields.io/badge/language-swift-ffac45.svg"></a>
-<a href="https://github.com/rakuyoMo/RaAPIWrapper/releases"><img src="https://img.shields.io/cocoapods/v/RaAPIWrapper.svg"></a>
-<a href="https://github.com/rakuyoMo/RaAPIWrapper/blob/main/LICENSE"><img src="https://img.shields.io/cocoapods/l/RaAPIWrapper.svg?style=flat"></a>
+<a href="https://github.com/RakuyoKit/RaAPIWrapper/releases"><img src="https://img.shields.io/cocoapods/v/RaAPIWrapper.svg"></a>
+<a href="https://github.com/RakuyoKit/RaAPIWrapper/blob/main/LICENSE"><img src="https://img.shields.io/cocoapods/l/RaAPIWrapper.svg?style=flat"></a>
 </p>
 
 `RaAPIWrapper` 利用 `@propertyWrapper` 来实现类似于 Android `Retrofit` 库中定义网络请求的效果。
@@ -54,7 +54,7 @@ pod 'RaAPIWrapper'
 ### Swift Package Manager
 
 - 依次选择 File > Swift Packages > Add Package Dependency
-- 输入 https://github.com/rakuyoMo/RaAPIWrapper.git
+- 输入 https://github.com/RakuyoKit/RaAPIWrapper.git
 - 选择 "Up to Next Major" 并填入对应的版本号
 
 或者将下面的内容添加到 `Package.swift` 文件中：
@@ -62,7 +62,7 @@ pod 'RaAPIWrapper'
 ```swift
 dependencies: [
   .package(
-    url: "https://github.com/rakuyoMo/RaAPIWrapper.git", 
+    url: "https://github.com/RakuyoKit/RaAPIWrapper.git", 
     .upToNextMajor(from: "1.1.0")
   )
 ]
