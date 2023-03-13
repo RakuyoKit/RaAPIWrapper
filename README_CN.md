@@ -63,7 +63,7 @@ pod 'RaAPIWrapper'
 dependencies: [
   .package(
     url: "https://github.com/RakuyoKit/RaAPIWrapper.git", 
-    .upToNextMajor(from: "1.1.0")
+    .upToNextMajor(from: "1.1.1")
   )
 ]
 ```
