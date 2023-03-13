@@ -11,13 +11,13 @@ Pod::Spec.new do |s|
   
   s.description = 'Use `@propertyWrapper to provide the necessary data for network requests in a more aggregated form.'
   
-  s.homepage = 'https://github.com/rakuyoMo/RaAPIWrapper'
+  s.homepage = 'https://github.com/RakuyoKit/RaAPIWrapper'
   
   s.license = 'MIT'
   
   s.author = { 'Rakuyo' => 'rakuyo.mo@gmail.com' }
   
-  s.source = { :git => 'https://github.com/rakuyoMo/RaAPIWrapper.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/RakuyoKit/RaAPIWrapper.git', :tag => s.version.to_s }
   
   s.requires_arc = true
   
