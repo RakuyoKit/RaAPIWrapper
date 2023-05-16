@@ -45,6 +45,10 @@ extension Dictionary: APIParameterConvertible where Key == String {
             if let value = $0 as? AnyAPIParameter { return value }
             if let value = $0 as? (any APIParameter) { return .init(value) }
             if let value = $0 as? APIParameterConvertible { return value.toParameters }
+            
+            if let value = $0 as? (any RawRepresentable) {
+                return mapAnyObjectToEncodable(value.rawValue as AnyObject)
+            }
             return mapAnyObjectToEncodable($0 as AnyObject)
         }
         
