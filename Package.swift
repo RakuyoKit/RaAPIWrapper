@@ -1,13 +1,12 @@
-// swift-tools-version: 5.6
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 5.1
 
 import PackageDescription
 
 let package = Package(
     name: "APIWrapper",
     platforms: [
-        .macOS(.v10_13),
         .iOS(.v11),
+        .macOS(.v10_13),
         .tvOS(.v11),
         .watchOS(.v4)
     ],
@@ -18,8 +17,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/Alamofire/Alamofire.git",
-            .upToNextMajor(from: "5.0.0")
-        ),
+            .upToNextMajor(from: "5.0.0")),
     ],
     targets: [
         .target(
@@ -27,17 +25,12 @@ let package = Package(
             path: "Sources/Core"),
         .target(
             name: "AFAPIWrapper",
-            dependencies: [
-                "APIWrapper",
-                .product(name: "Alamofire", package: "Alamofire")
-            ],
-            path: "Sources/Alamofire"
-        ),
+            dependencies: ["APIWrapper", "Alamofire"],
+            path: "Sources/Alamofire"),
         .testTarget(
             name: "APIWrapperTests",
             dependencies: ["APIWrapper"],
-            path: "Tests"
-        ),
+            path: "Tests"),
     ],
     swiftLanguageVersions: [.v5]
 )
