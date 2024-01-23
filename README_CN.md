@@ -1,9 +1,12 @@
 # RaAPIWrapper
 
 <p align="center">
-<a><img src="https://img.shields.io/badge/language-swift-ffac45.svg"></a>
-<a href="https://github.com/RakuyoKit/RaAPIWrapper/releases"><img src="https://img.shields.io/cocoapods/v/RaAPIWrapper.svg"></a>
-<a href="https://github.com/RakuyoKit/RaAPIWrapper/blob/main/LICENSE"><img src="https://img.shields.io/cocoapods/l/RaAPIWrapper.svg?style=flat"></a>
+<a href="https://swiftpackageindex.com/RakuyoKit/RaAPIWrapper"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FRakuyoKit%2FRaAPIWrapper%2Fbadge%3Ftype%3Dswift-versions"></a>
+<a href="https://swiftpackageindex.com/RakuyoKit/RaAPIWrapper"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FRakuyoKit%2FRaAPIWrapper%2Fbadge%3Ftype%3Dplatforms"></a>
+</p>
+<p align="center">
+<a href="https://cocoapods.org/pods/RaAPIWrapper"><img src="https://img.shields.io/github/v/tag/RakuyoKit/RaAPIWrapper.svg?include_prereleases=&sort=semver"></a>
+<a href="https://raw.githubusercontent.com/RakuyoKit/RaAPIWrapper/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-black"></a>
 </p>
 
 `RaAPIWrapper` 利用 `@propertyWrapper` 来实现类似于 Android `Retrofit` 库中定义网络请求的效果。
