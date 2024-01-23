@@ -21,7 +21,7 @@ When you have a large number of network request apis in the same file `RaAPIWrap
 
 The good thing is that you can easily integrate `RaAPIWrapper` into your existing project with few or no code changes, and `RaAPIWrapper` can coexist very well with the existing web framework in your project.
 
-## Prerequisites
+## Requirements
 
 - **iOS 12**、**macOS 10.14**、**watchOS 5.0**、**tvOS 12** or later.
 - **Xcode 14** or later required.
