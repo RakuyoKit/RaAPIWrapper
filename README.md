@@ -20,7 +20,7 @@ The good thing is that you can easily integrate `RaAPIWrapper` into your existin
 
 ## Prerequisites
 
-- **iOS 11**、**macOS 10.13**、**watchOS 4.0**、**tvOS 11** or later.
+- **iOS 12**、**macOS 10.14**、**watchOS 5.0**、**tvOS 12** or later.
 - **Xcode 14** or later required.
 - **Swift 5.7** or later required.
 
