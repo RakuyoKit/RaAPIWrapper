@@ -22,7 +22,8 @@ let package = Package(
     targets: [
         .target(
             name: "APIWrapper",
-            path: "Sources/Core"),
+            path: "Sources/Core",
+            resources: [.copy("PrivacyInfo.xcprivacy")]),
         .target(
             name: "AFAPIWrapper",
             dependencies: ["APIWrapper", "Alamofire"],

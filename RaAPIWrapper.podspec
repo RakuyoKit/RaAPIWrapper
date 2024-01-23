@@ -34,6 +34,8 @@ Pod::Spec.new do |s|
   
   s.subspec "Core" do |cs|
     cs.source_files = 'Sources/Core/**/*'
+    
+    cs.resource_bundles = { 'RaAPIWrapper' => ['Sources/Core/PrivacyInfo.xcprivacy'] }
   end
   
   s.subspec "AF" do |cs|
