@@ -24,9 +24,7 @@ let package = Package(
     targets: [
         .target(
             name: "APIWrapper",
-            dependencies: ["Alamofire"],
-            path: "Sources/Core"
-        ),
+            path: "Sources/Core"),
         .target(
             name: "AFAPIWrapper",
             dependencies: [
