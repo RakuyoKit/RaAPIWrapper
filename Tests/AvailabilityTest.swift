@@ -10,7 +10,7 @@ import XCTest
 @testable import APIWrapper
 
 final class AvailabilityTests: XCTestCase {
-    func testExample() throws {
+    func testTupleParamAPI() throws {
         let param: (id: Int, name: String?) = (1, nil)
         let info = TestAPI.$tupleParamAPI.createRequestInfo(param)
         
@@ -21,6 +21,12 @@ final class AvailabilityTests: XCTestCase {
         XCTAssertEqual(info.httpMethod, PostHTTPMethod.httpMethod)
         XCTAssertEqual(info.path, TestAPI.path)
         XCTAssertNil(info.specialBaseURL)
+    }
+    
+    func testEnumParamAPI() throws {
+        let info = TestAPI.$enumAPI.createRequestInfo(.one)
+        
+        XCTAssertEqual(info.parameters, packToParameters(["id": TestEnum.one.rawValue]))
     }
     
     private func packToParameters(_ value: [String: Int?]) -> AnyAPIParameter {
@@ -44,5 +50,10 @@ fileprivate struct TestAPI {
     @POST(Self.path)
     static var test2API: APIParameterBuilder<(id: String, name: String)>? = .init {
         ["id": $0.id, "name": $0.name]
+    }
+    
+    @POST("/api/v1/enum_param")
+    static var enumAPI: APIParameterBuilder<TestEnum>? = .init {
+        ["id": $0]
     }
 }

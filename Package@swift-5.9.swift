@@ -1,4 +1,4 @@
-// swift-tools-version: 5.1
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -9,6 +9,7 @@ let package = Package(
         .macOS(.v10_14),
         .tvOS(.v12),
         .watchOS(.v5),
+        .visionOS(.v1)
     ],
     products: [
         .library(name: "APIWrapper", targets: ["APIWrapper"]),
@@ -17,21 +18,19 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/Alamofire/Alamofire.git",
-            .upToNextMajor(from: "5.0.0")),
+            .upToNextMajor(from: "5.8.0")),
     ],
     targets: [
         .target(
             name: "APIWrapper",
-            path: "Sources/Core",
-            resources: [.copy("PrivacyInfo.xcprivacy")]),
+            path: "Sources/Core"),
         .target(
             name: "AFAPIWrapper",
             dependencies: ["APIWrapper", "Alamofire"],
             path: "Sources/Alamofire"),
         .testTarget(
             name: "APIWrapperTests",
-            dependencies: ["APIWrapper"],
-            path: "Tests"),
+            dependencies: ["APIWrapper"]),
     ],
     swiftLanguageVersions: [.v5]
 )
