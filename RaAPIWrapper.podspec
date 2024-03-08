@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   
   s.name = 'RaAPIWrapper'
   
-  s.version = '1.2.2'
+  s.version = '1.2.3'
   
   s.summary = 'Makes it easier to define a network request.'
   
@@ -42,7 +42,7 @@ Pod::Spec.new do |s|
     cs.source_files = 'Sources/Alamofire/*'
     
     cs.dependency "RaAPIWrapper/Core"
-    cs.dependency "Alamofire", "~> 5.8.0"
+    cs.dependency "Alamofire", '>= 5.8.0', '< 6.0.0'
   end
   
 end
