@@ -6,16 +6,17 @@ import Foundation
 
 import APIWrapper
 
-/*:
- The `RaAPIWrapper` is extremely extensible.
- You can work with the `userInfo` property to customize the api parameters you need.
- 
- The `RaAPIWrapper/AF` module then takes advantage of this feature and supports the `ParameterEncoding` field of `Alamofire`.
- 
- The following code demonstrates how to add a custom parameter to `API`:
- */
+// MARK: - VerificationType
 
-// will be used later as a custom parameter of the api.
+/// :
+/// The `RaAPIWrapper` is extremely extensible.
+/// You can work with the `userInfo` property to customize the api parameters you need.
+///
+/// The `RaAPIWrapper/AF` module then takes advantage of this feature and supports the `ParameterEncoding` field of `Alamofire`.
+///
+/// The following code demonstrates how to add a custom parameter to `API`:
+
+/// will be used later as a custom parameter of the api.
 enum VerificationType: Hashable {
     case normal
     case special
@@ -35,12 +36,13 @@ extension API {
     }
 }
 
+// MARK: - AdvancedAPI
+
 enum AdvancedAPI {
     /// Finally, the new initialization method declared above is called on
     /// the property wrapper to complete the interface definition.
     @GET("/api", verification: .normal)
     static var testAPI: APIParameterBuilder<()>? = nil
 }
-
 
 //: [Next](@next)

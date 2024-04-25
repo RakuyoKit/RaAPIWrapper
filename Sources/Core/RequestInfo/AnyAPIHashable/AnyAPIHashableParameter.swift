@@ -8,26 +8,28 @@
 
 import Foundation
 
+// MARK: - AnyAPIHashableParameter
+
 /// Make `Encodable` follow `Hashable` protocol.
 public struct AnyAPIHashableParameter: AnyAPIHashable {
     public typealias Value = Encodable
-    
-    public typealias Input = Value & Hashable
-    
+
+    public typealias Input = Hashable & Value
+
     public let value: Value
-    
+
     public let equals: (Value) -> Bool
-    
+
     public let hash: (_ hasher: inout Hasher) -> Void
-    
+
     public init<T: Input>(_ value: T) {
         self.value = value
-        self.equals = { ($0 as? T == value) }
-        self.hash = { $0.combine(value) }
+        equals = { ($0 as? T == value) }
+        hash = { $0.combine(value) }
     }
 }
 
-// MARK: - Encodable
+// MARK: Encodable
 
 extension AnyAPIHashableParameter: Encodable {
     public func encode(to encoder: Encoder) throws {

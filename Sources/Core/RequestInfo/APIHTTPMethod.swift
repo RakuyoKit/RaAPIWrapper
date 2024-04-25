@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - APIHTTPMethod
+
 /// The HTTP method to use when requesting the api.
 ///
 /// With the `ExpressibleByStringLiteral` protocol,
@@ -16,13 +18,13 @@ public struct APIHTTPMethod: RawRepresentable {
     public typealias RawValue = String
     
     public var rawValue: RawValue
-    
+
     public init(rawValue: RawValue) {
         self.rawValue = rawValue
     }
 }
 
-// MARK: - ExpressibleByStringLiteral
+// MARK: ExpressibleByStringLiteral
 
 extension APIHTTPMethod: ExpressibleByStringLiteral {
     public init(stringLiteral value: RawValue) {
@@ -30,6 +32,6 @@ extension APIHTTPMethod: ExpressibleByStringLiteral {
     }
 }
 
-// MARK: - Hashable
+// MARK: Hashable
 
 extension APIHTTPMethod: Hashable { }

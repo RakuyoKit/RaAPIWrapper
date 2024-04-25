@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - AnyAPIHashable
+
 /// You can make any property or protocol follow the `Hashable` protocol through this protocol.
 ///
 /// Define a type, then make it follow the `AnyAPIHashable` protocol,
@@ -21,15 +23,15 @@ public protocol AnyAPIHashable: Hashable, CustomStringConvertible, CustomDebugSt
     /// The type itself that you want to make follow the Hashable protocol.
     /// For example: `typealias Value = Encodable`
     associatedtype Value
-    
+
     /// Storing the original object.
     var value: Value { get }
-    
+
     /// Used to implement `Equatable`.
     ///
     /// When using this type, you do not need to care about the specifics of the value.
     var equals: (Value) -> Bool { get }
-    
+
     /// Used to implement `Hashable`.
     ///
     /// When using this type, you do not need to care about the specifics of the value.
@@ -40,11 +42,11 @@ public protocol AnyAPIHashable: Hashable, CustomStringConvertible, CustomDebugSt
 
 extension AnyAPIHashable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.equals(rhs.value)
+        lhs.equals(rhs.value)
     }
-    
+
     public func hash(into hasher: inout Hasher) {
-        self.hash(&hasher)
+        hash(&hasher)
     }
 }
 

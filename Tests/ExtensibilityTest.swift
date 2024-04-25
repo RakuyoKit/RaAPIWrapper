@@ -9,19 +9,25 @@
 import XCTest
 @testable import APIWrapper
 
+// MARK: - ExtensibilityTests
+
 final class ExtensibilityTests: XCTestCase {
     func testExample() throws {
         let info = TestAPI.$testAPI.createRequestInfo(())
-        
+
         XCTAssertEqual(info.userInfo, ["mockType": MockType.someType])
         XCTAssertNotEqual(info.userInfo, [:])
     }
 }
 
-fileprivate enum TestAPI {
+// MARK: - TestAPI
+
+private enum TestAPI {
     @GET("/api/v1/tuple_param", mockType: .someType)
     static var testAPI: APIParameterBuilder<()>? = nil
 }
+
+// MARK: - MockType
 
 enum MockType: Hashable {
     case someType

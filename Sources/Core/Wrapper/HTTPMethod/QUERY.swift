@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - QueryHTTPMethod
+
 public enum QueryHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "QUERY" }
 }

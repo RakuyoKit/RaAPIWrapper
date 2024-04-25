@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - PostHTTPMethod
+
 public enum PostHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "POST" }
 }

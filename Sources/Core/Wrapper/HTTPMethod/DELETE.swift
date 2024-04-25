@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - DeleteHTTPMethod
+
 public enum DeleteHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "DELETE" }
 }

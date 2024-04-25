@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - OptionsHTTPMethod
+
 public enum OptionsHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "OPTIONS" }
 }

@@ -12,9 +12,9 @@ import Foundation
 import APIWrapper
 #endif
 
-public extension APIRequestInfo {
+extension APIRequestInfo {
     /// Encoding of `Parameters`.
-    var parameterEncoding: AnyAPIParameterEncoding? {
+    public var parameterEncoding: AnyAPIParameterEncoding? {
         userInfo[parameterEncodingKey] as? AnyAPIParameterEncoding
     }
 }

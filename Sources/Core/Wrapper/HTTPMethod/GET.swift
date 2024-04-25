@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - GetHTTPMethod
+
 public enum GetHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "GET" }
 }

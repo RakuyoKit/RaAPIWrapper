@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - PatchHTTPMethod
+
 public enum PatchHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "PATCH" }
 }

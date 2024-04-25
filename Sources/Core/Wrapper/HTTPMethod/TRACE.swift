@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - TraceHTTPMethod
+
 public enum TraceHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "TRACE" }
 }

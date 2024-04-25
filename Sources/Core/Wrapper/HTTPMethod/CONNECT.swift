@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - ConnectHTTPMethod
+
 public enum ConnectHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "CONNECT" }
 }

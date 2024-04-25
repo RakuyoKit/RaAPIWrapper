@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - PutHTTPMethod
+
 public enum PutHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "PUT" }
 }
