@@ -31,6 +31,5 @@ let package = Package(
             name: "APIWrapperTests",
             dependencies: ["APIWrapper"],
             path: "Tests"),
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )

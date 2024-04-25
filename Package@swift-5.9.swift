@@ -32,6 +32,5 @@ let package = Package(
         .testTarget(
             name: "APIWrapperTests",
             dependencies: ["APIWrapper"]),
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )
