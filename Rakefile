@@ -46,7 +46,6 @@ end
 
 namespace :swift do
   FORMAT_COMMAND = 'swift package --allow-writing-to-package-directory format'
-  TEST_COMMAND = 'xcodebuild -scheme RakuyoKit -destination'
 
   desc 'Run Format'
   task :format do
@@ -60,6 +59,6 @@ namespace :swift do
 
   desc 'Test'
   task :test do
-    sh TEST_COMMAND + " 'platform=iOS Simulator,OS=17.4,name=iPhone 15 Pro'"
+    sh 'swift test'
   end
 end
