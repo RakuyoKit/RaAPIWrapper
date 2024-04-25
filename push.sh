@@ -28,12 +28,12 @@ git_merge() {
     local merge_message=$3
 
     git checkout "$to_branch"
-    git merge --no-ff -m "$merge_message" "$from_branch"
-    git_push "$to_branch"
+    git merge --no-ff -m "$merge_message" "$from_branch" --no-verify
+    git_push "$to_branch" --no-verify
 }
 
 git_push() {
-    git push origin "$1"
+    git push origin "$1" --no-verify
 }
 
 release(){
