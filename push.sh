@@ -41,12 +41,14 @@ git_push() {
 }
 
 release(){
+    main_branch="main"
+    develop_branch="develop"
     release_branch=release/$version
-    
+
     if git show-branch develop &>/dev/null; then
-        source_branch="develop"
+        source_branch=$develop_branch
     else
-        source_branch="main"
+        source_branch=$main_branch
     fi
 
     git checkout -b "$release_branch" "$source_branch"
@@ -54,13 +56,13 @@ release(){
     git_message="release: version $version"
     git add . && git commit -m "$git_message" --no-verify
 
-    git_merge "$release_branch" "main" "Merge branch '$release_branch'"
+    git_merge "$release_branch" "$main_branch" "Merge branch '$release_branch'"
 
     git tag "$version"
     git_push "$version"
 
-    if [ "$source_branch" == "develop" ]; then
-        git_merge "$version" "develop" "Merge tag '$version' into develop"
+    if [ "$source_branch" == "$develop_branch" ]; then
+        git_merge "$version" "$develop_branch" "Merge tag '$version' into $develop_branch"
     fi
 
     git branch -d $release_branch
@@ -68,7 +70,7 @@ release(){
     execute_pod trunk push
 }
 
-lint_pod #&& release
+lint_pod && release
 
 #echo "Whether to skip local verification? [Y/N]？"
 #if read -t 5 is_skip_lint; then
