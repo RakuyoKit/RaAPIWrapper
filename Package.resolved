@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RakuyoKit/swift.git",
       "state" : {
-        "revision" : "ae681002a68e7c7d62d1afa2aa32ec6f95907205",
-        "version" : "1.1.2"
+        "revision" : "48c5586f3b28bff531f067fef14898c8c862fa25",
+        "version" : "1.1.3"
       }
     },
     {
