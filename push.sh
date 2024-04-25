@@ -22,25 +22,45 @@ lintLib(){
     pod lib lint $name.podspec --allow-warnings --skip-tests
 }
 
+git_merge() {
+    local from_branch=$1
+    local to_branch=$2
+    local merge_message=$3
+
+    git checkout "$to_branch"
+    git merge --no-ff -m "$merge_message" "$from_branch"
+    git_push "$to_branch"
+}
+
+git_push() {
+    git push origin "$1"
+}
+
 release(){
     release_branch=release/$version
     
-    git checkout -b $release_branch develop
-    
-    git_message="[Release] version: $version"
-    
-    git add . && git commit -m "$git_message"
-    
-    git checkout main
-    git merge --no-ff -m 'Merge branch '$release_branch'' $release_branch
-    git push origin main
-    git tag $version
-    git push origin $version
-    git checkout develop
-    git merge --no-ff -m 'Merge tag '$version' into develop' $version
-    git push origin develop
+    if git show-branch develop &>/dev/null; then
+        source_branch="develop"
+    else
+        source_branch="main"
+    fi
+
+    git checkout -b "$release_branch" "$source_branch"
+
+    git_message="release: version $version"
+    git add . && git commit -m "$git_message" --no-verify
+
+    git_merge "$release_branch" "main" "Merge branch '$release_branch'"
+
+    git tag "$version"
+    git_push "$version"
+
+    if [ "$source_branch" == "develop" ]; then
+        git_merge "$version" "develop" "Merge tag '$version' into develop"
+    fi
+
     git branch -d $release_branch
-    
+
     pod trunk push $name.podspec --allow-warnings --skip-tests
 }
 
