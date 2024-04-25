@@ -18,8 +18,12 @@ do
     fi
 done < $(find . -name '*.podspec' -not -path './.build/*')
 
-lintLib(){
-    pod lib lint $name.podspec --allow-warnings --skip-tests
+execute_pod(){
+    pod $1 $2 $name.podspec --allow-warnings --skip-tests
+}
+
+lint_pod(){
+    execute_pod lib lint
 }
 
 git_merge() {
@@ -61,16 +65,16 @@ release(){
 
     git branch -d $release_branch
 
-    pod trunk push $name.podspec --allow-warnings --skip-tests
+    execute_pod trunk push
 }
 
-lintLib && release
+lint_pod #&& release
 
 #echo "Whether to skip local verification? [Y/N]？"
 #if read -t 5 is_skip_lint; then
 #    case $is_skip_lint in
 #    (N | n)
-#        lintLib && release;;
+#        lint_pod && release;;
 #    (*)
 #        release;;
 #    esac
