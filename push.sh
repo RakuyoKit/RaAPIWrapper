@@ -1,6 +1,6 @@
 #!/bin/zsh
 # Authoer: Rakuyo
-# Update Date: 2022.04.02
+# Update Date: 2024.04.25
 
 project_path=$(cd `dirname $0` ; pwd)
 
@@ -16,7 +16,7 @@ do
         version=`echo $line | cut -d = -f 2 | cut -d \' -f 2`
         break
     fi
-done < $(find ./ -name '*.podspec')
+done < $(find . -name '*.podspec' -not -path './.build/*')
 
 lintLib(){
     pod lib lint $name.podspec --allow-warnings --skip-tests
