@@ -4,11 +4,12 @@ import Foundation
 
 import APIWrapper
 
-/*:
- This example uses [Postman Echo](https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65?ctx=documentation) as the sample api.
- 
- The return value of this api depends on the parameters and will return the parameters, headers and other data as is.
- */
+// MARK: - BasicAPI
+
+/// :
+/// This example uses [Postman Echo](https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65?ctx=documentation) as the sample api.
+///
+/// The return value of this api depends on the parameters and will return the parameters, headers and other data as is.
 
 //: To begin by showing some of the most basic uses, look at how the api is defined.
 
@@ -26,12 +27,12 @@ enum BasicAPI {
 do {
     // Requests the api and parses the return value of the interface. Note the use of the `$` character.
     let response = try await BasicAPI.$get.request(to: PostManResponse<Arg>.self)
-    
+
     // You can also ignore the return value and focus only on the act of requesting the api itself.
     try await BasicAPI.$get.request()
-    
+
 } catch {
-    print("❌ get request failure: \(error)")
+    Log.log("❌ get request failure: \(error)")
 }
 
 //: The api with parameters is a little more complicated to define:
@@ -45,10 +46,10 @@ extension BasicAPI {
     static var postWithTuple: APIParameterBuilder<(foo1: String, foo2: Int?)>? = .init {
         [
             "foo1": $0.foo1,
-            "foo2": $0.foo2
+            "foo2": $0.foo2,
         ]
     }
-    
+
     /// This is an api for requests using the **POST** method.
     ///
     /// The full api address is: [](https://postman-echo.com/post) .
@@ -59,18 +60,19 @@ extension BasicAPI {
 
 do {
     // Request the api and parse the return value.
-    let tupleAPIResponse = try await BasicAPI.$postWithTuple.request(with: (foo1: "foo1", foo2: nil), to: PostManResponse<Arg>.self)
-    
-    /**
-     *  If you look at the return value, you will see that `foo2` is not passed to the server.
-     *  This is because `RaAPIWrapper` filters out all parameters with the value `nil`.
-     */
-    
+    let tupleAPIResponse = try await BasicAPI.$postWithTuple.request(
+        with: (foo1: "foo1", foo2: nil),
+        to: PostManResponse<Arg>.self
+    )
+
+    ///  If you look at the return value, you will see that `foo2` is not passed to the server.
+    ///  This is because `RaAPIWrapper` filters out all parameters with the value `nil`.
+
     // Try using model as a parameter and you will get the same result.
     let modelAPIResponse = try await BasicAPI.$postWithModel.request(with: .init(foo2: "foo2"), to: PostManResponse<Arg>.self)
-    
+
 } catch {
-    print("❌ post request failure: \(error)")
+    Log.log("❌ post request failure: \(error)")
 }
 
 //: [Next](@next)

@@ -17,20 +17,28 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/Alamofire/Alamofire.git",
-            .upToNextMajor(from: "5.0.0")),
+            .upToNextMajor(from: "5.0.0")
+        ),
     ],
     targets: [
         .target(
             name: "APIWrapper",
-            path: "Sources/Core"),
+            path: "Sources/Core"
+        ),
         .target(
             name: "AFAPIWrapper",
             dependencies: ["APIWrapper", "Alamofire"],
-            path: "Sources/Alamofire"),
+            path: "Sources/Alamofire"
+        ),
         .testTarget(
             name: "APIWrapperTests",
             dependencies: ["APIWrapper"],
-            path: "Tests"),
-    ],
-    swiftLanguageVersions: [.v5]
+            path: "Tests"
+        ),
+    ]
 )
+
+#if swift(>=5.6)
+// Add the Swift formatting plugin if possible
+package.dependencies.append(.package(url: "https://github.com/RakuyoKit/swift.git", from: "1.1.2"))
+#endif

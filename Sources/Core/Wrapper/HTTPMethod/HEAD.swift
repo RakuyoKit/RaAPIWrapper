@@ -3,10 +3,12 @@
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/12/15.
-//  Copyright © 2022 Rakuyo. All rights reserved.
+//  Copyright © 2024 RakuyoKit. All rights reserved.
 //
 
 import Foundation
+
+// MARK: - HeadHTTPMethod
 
 public enum HeadHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "HEAD" }

@@ -3,7 +3,7 @@
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/12/15.
-//  Copyright © 2022 Rakuyo. All rights reserved.
+//  Copyright © 2024 RakuyoKit. All rights reserved.
 //
 
 import Foundation
@@ -17,32 +17,34 @@ import APIWrapper
 /// Represents an arbitrary api parameter.
 public typealias AnyAPIParameterEncoding = AnyAPIHashableParameterEncoding
 
+// MARK: - AnyAPIHashableParameterEncoding
+
 /// Make `AlamofireParameterEncoding` follow `Hashable` protocol.
 public struct AnyAPIHashableParameterEncoding: AnyAPIHashable {
     public typealias Value = ParameterEncoding
-    
-    public typealias Input = Value & Hashable
-    
+
+    public typealias Input = Hashable & Value
+
     public let value: Value
-    
+
     public let equals: (Value) -> Bool
-    
+
     public let hash: (_ hasher: inout Hasher) -> Void
-    
+
     public init<T: Input>(_ value: T) {
         self.value = value
-        self.equals = { ($0 as? T == value) }
-        self.hash = { $0.combine(value) }
+        equals = { ($0 as? T == value) }
+        hash = { $0.combine(value) }
     }
 }
 
-// MARK: - AlamofireParameterEncoding
+// MARK: - AnyAPIParameterEncoding + ParameterEncoding
 
 extension AnyAPIParameterEncoding: ParameterEncoding {
     public func encode(
         _ urlRequest: Alamofire.URLRequestConvertible,
         with parameters: Alamofire.Parameters?
     ) throws -> URLRequest {
-        return try value.encode(urlRequest, with: parameters)
+        try value.encode(urlRequest, with: parameters)
     }
 }

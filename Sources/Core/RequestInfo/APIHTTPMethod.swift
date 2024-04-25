@@ -3,10 +3,12 @@
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/12/15.
-//  Copyright © 2022 Rakuyo. All rights reserved.
+//  Copyright © 2024 RakuyoKit. All rights reserved.
 //
 
 import Foundation
+
+// MARK: - APIHTTPMethod
 
 /// The HTTP method to use when requesting the api.
 ///
@@ -16,13 +18,13 @@ public struct APIHTTPMethod: RawRepresentable {
     public typealias RawValue = String
     
     public var rawValue: RawValue
-    
+
     public init(rawValue: RawValue) {
         self.rawValue = rawValue
     }
 }
 
-// MARK: - ExpressibleByStringLiteral
+// MARK: ExpressibleByStringLiteral
 
 extension APIHTTPMethod: ExpressibleByStringLiteral {
     public init(stringLiteral value: RawValue) {
@@ -30,6 +32,6 @@ extension APIHTTPMethod: ExpressibleByStringLiteral {
     }
 }
 
-// MARK: - Hashable
+// MARK: Hashable
 
 extension APIHTTPMethod: Hashable { }

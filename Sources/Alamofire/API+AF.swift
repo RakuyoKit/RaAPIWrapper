@@ -3,7 +3,7 @@
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/12/19.
-//  Copyright © 2022 Rakuyo. All rights reserved.
+//  Copyright © 2024 RakuyoKit. All rights reserved.
 //
 
 import Foundation
@@ -14,8 +14,8 @@ import APIWrapper
 
 let parameterEncodingKey = "af_parameter_encoding"
 
-public extension API {
-    convenience init(
+extension API {
+    public convenience init(
         wrappedValue: ParameterBuilder?,
         _ path: String,
         specialBaseURL: URL? = nil,
@@ -25,7 +25,7 @@ public extension API {
     ) {
         var _userInfo = userInfo
         _userInfo[parameterEncodingKey] = parameterEncoding
-        
+
         self.init(
             wrappedValue: wrappedValue,
             path,
@@ -34,9 +34,11 @@ public extension API {
             userInfo: _userInfo
         )
     }
-    
+}
+
+extension API {
     /// Encoding of `Parameters`.
-    var parameterEncoding: AnyAPIParameterEncoding? {
+    public var parameterEncoding: AnyAPIParameterEncoding? {
         userInfo[parameterEncodingKey] as? AnyAPIParameterEncoding
     }
 }

@@ -3,10 +3,12 @@
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/8/26.
-//  Copyright © 2022 Rakuyo. All rights reserved.
+//  Copyright © 2024 RakuyoKit. All rights reserved.
 //
 
 import Foundation
+
+// MARK: - GetHTTPMethod
 
 public enum GetHTTPMethod: APIHTTPMethodWrapper {
     public static var httpMethod: APIHTTPMethod { "GET" }

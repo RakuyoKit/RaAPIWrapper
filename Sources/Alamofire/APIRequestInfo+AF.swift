@@ -3,7 +3,7 @@
 //  RaAPIWrapper
 //
 //  Created by Rakuyo on 2022/12/19.
-//  Copyright © 2022 Rakuyo. All rights reserved.
+//  Copyright © 2024 RakuyoKit. All rights reserved.
 //
 
 import Foundation
@@ -12,9 +12,9 @@ import Foundation
 import APIWrapper
 #endif
 
-public extension APIRequestInfo {
+extension APIRequestInfo {
     /// Encoding of `Parameters`.
-    var parameterEncoding: AnyAPIParameterEncoding? {
+    public var parameterEncoding: AnyAPIParameterEncoding? {
         userInfo[parameterEncodingKey] as? AnyAPIParameterEncoding
     }
 }
