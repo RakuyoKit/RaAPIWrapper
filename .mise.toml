@@ -1,0 +1,2 @@
+[tools]
+pre-commit = "3.7.0"
