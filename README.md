@@ -69,7 +69,7 @@ Or add the following to your `Package.swift` file:
 dependencies: [
   .package(
     url: "https://github.com/RakuyoKit/RaAPIWrapper.git", 
-    .upToNextMajor(from: "1.2.3")
+    .upToNextMajor(from: "1.2.4")
   )
 ]
 ```
