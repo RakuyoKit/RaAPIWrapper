@@ -1,5 +1,22 @@
+module Tools
+  def mise_exec_prefix
+    'mise exec --'
+  end
+
+  def ci_mode?
+    ENV['CI'] == 'true'
+  end
+
+  def ci_debug_mode?
+    ENV['RUNNER_DEBUG'] == '1' || ENV['ACTIONS_RUNNER_DEBUG'] == 'true'
+  end
+end
+
+# Reference other rake files to avoid adding the -f parameter when executing the rake command
+FileList['**/*.rb'].each { |rf| require_relative rf }
+
 namespace :env do
-  MISE_EXEC_PREFIX = 'mise exec --'
+  include Tools
 
   desc 'Init env'
   task :init do
@@ -16,7 +33,7 @@ namespace :env do
 
   desc 'Install git hook'
   task :githook do
-    sh "#{MISE_EXEC_PREFIX} pre-commit install"
+    sh "#{mise_exec_prefix} pre-commit install"
   end
 
   def install_mise
